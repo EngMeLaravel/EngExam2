@@ -1,0 +1,19 @@
+nav a.nav-link{
+    color: white!important;
+    margin: 0px 8px;
+    transition: 0.2s;
+}
+nav a.nav-link:hover {
+    background: #497BE2;
+    border-radius: 19px;
+    color: #e4e2e2!important;
+}
+.navbar{
+    background: #4D81ED;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+}
+.navbar-nav{
+    margin-left: 140px;
+}

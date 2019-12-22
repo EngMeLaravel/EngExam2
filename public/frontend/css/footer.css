@@ -1,0 +1,15 @@
+#footer a{
+    color: black;
+}
+#footer p {
+    color: #808080;
+    font-size: 14px;
+}
+#footer .col-md-4 {
+    margin-top: 20px;
+    line-height: 45px;
+}
+#footer .col-md-4:last-child a {
+    margin-top: 32px;
+    display: inline-block;
+}
