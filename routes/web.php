@@ -18,3 +18,5 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('pages.home');
 });
+
+Route::post('/translate', 'HomeController@ajax_translate');
