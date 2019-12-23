@@ -14,7 +14,7 @@
                         <nav>
                             <ul>
                                 <li class="expand"><a href="/">Trang chủ</a></li>
-                                <li class="expand"><a href="">Thư viện chung</a></li>
+                                <li class="expand"><a href="{{ route('get.public_lib.index') }}">Thư viện chung</a></li>
                                 <li class="expand"><a href="" title="Tin tức">Kho cá nhân</a></li>
                                 <li class="expand"><a href="">Giới thiệu</a></li>
                                 <li class="expand"><a href="">Liên hệ</a></li>
