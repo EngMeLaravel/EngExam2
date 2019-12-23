@@ -11,10 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/home', function () {
-    return view('pages.home');
+Route::prefix('public-library')->group(function (){
+    Route::get('/','PublicLibrary@index')->name('get.public_lib.index');
 });
