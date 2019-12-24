@@ -2,11 +2,7 @@
 @section('add_more_css')
     <link rel="stylesheet" href="{{ asset('css/home.css')  }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script
-        src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous">
-    </script>
+    <script src="{{ asset("js/jquery-3.4.1.min.js") }}"> </script>
     <script>
         $(document).ready(function(){
             $('#textarea_one').keyup(function(event) {
@@ -38,8 +34,8 @@
                 <div class="text-center"><a href="">English</a></div>
             </div>
             <div class="row translate_body" style="clear: left">
-                <div class="col-md-6" style="padding: 0px;"><textarea style="outline: none!important;" class="form-control" name="" id="textarea_one" cols="30" rows="10" placeholder="Nhập nội dung"></textarea></div>
-                <div class="col-md-6" style="padding: 0px;"><textarea style="outline: none!important;" class="form-control" name="" id="textarea_two" cols="30" rows="10" placeholder="Bản dịch"></textarea></div>
+                <div class="col-md-6" style="padding: 0px;"><textarea style="resize: none;" class="form-control" name="" id="textarea_one" cols="30" rows="10" placeholder="Nhập nội dung"></textarea></div>
+                <div class="col-md-6" style="padding: 0px;"><textarea style="resize: none;" class="form-control" name="" id="textarea_two" cols="30" rows="10" placeholder="Bản dịch"></textarea></div>
             </div>
         </div>
         <div class="col-md-3"></div>
