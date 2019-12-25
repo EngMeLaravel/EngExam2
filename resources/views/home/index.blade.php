@@ -30,7 +30,7 @@
         <div class="col-md-9">
             <div class="row translate_head">
                 <div class="text-center"><a href="">Vietnamese</a></div>
-                <div class="text-center ex_arrows"><a href=""><img src="{{ asset("frontend/images/home/exchange-arrows.png") }}" alt=""></a></div>
+                <div class="text-center ex_arrows"><a href=""><img src="{{ asset("img/exchange-arrows.png") }}" alt=""></a></div>
                 <div class="text-center"><a href="">English</a></div>
             </div>
             <div class="row translate_body" style="clear: left">
