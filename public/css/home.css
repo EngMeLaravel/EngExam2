@@ -2,3 +2,19 @@
     margin: 0;
     padding: 0;
 }
+
+.translate_head{
+    display: flex;
+    padding: 10px;
+    border: 1px solid #CCCCCC;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.translate_head div{
+    width: 40%;
+    padding: 0px;
+}
+.translate_head .ex_arrows{
+    width: 20%;
+}
