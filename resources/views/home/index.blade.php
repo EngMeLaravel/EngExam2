@@ -39,7 +39,7 @@
             </div>
             <div class="row translate_body" style="clear: left">
                 <div class="col-md-6" style="padding: 0px;"><textarea style="outline: none!important;" class="form-control" name="" id="textarea_one" cols="30" rows="10" placeholder="Nhập nội dung"></textarea></div>
-                <div class="col-md-6" style="padding: 0px;"><textarea style="outline: none!important;" class="form-control" name="" id="textarea_two" cols="30" rows="10" placeholder="Bản dịch"></textarea></div>
+                <div class="col-md-6" style="padding: 0px;"><textarea disabled style="outline: none!important;" class="form-control" name="" id="textarea_two" cols="30" rows="10" placeholder="Bản dịch"></textarea></div>
             </div>
         </div>
         <div class="col-md-3"></div>
