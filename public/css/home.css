@@ -18,3 +18,10 @@
 .translate_head .ex_arrows{
     width: 20%;
 }
+.panel-body a{
+    font-size: 16px;
+}
+.row.translate_more {
+    border: 1px solid #cccccc;
+    padding: 30px 10px;
+}
