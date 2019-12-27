@@ -82,6 +82,9 @@
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
 
+    {{-- font --}}
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
     @yield('add_more_css')
 
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
@@ -128,9 +131,9 @@
 
 <!-- JS -->
 
-<!-- jquery-1.11.3.min js
+<!-- jquery-3.4.1.min.js
 ============================================ -->
-<script src="{{asset('js/vendor/jquery-1.11.3.min.js')}}"></script>
+<script language="JavaScript" type="text/javascript" src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
 
 <!-- bootstrap js
 ============================================ -->
@@ -176,6 +179,8 @@
 <!-- main js
 ============================================ -->
 <script src="{{asset('js/main.js')}}"></script>
+
+{{--<script src="{{asset('js/jquery.contextMenu.min.js')}}"></script>--}}
 
 @yield('script')
 </body>

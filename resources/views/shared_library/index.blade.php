@@ -8,6 +8,7 @@
         h4{
             margin: 0;
             padding: 15px;
+            font-size: 15px;
         }
         .nganh-con{
             position: relative;
@@ -56,17 +57,20 @@
         #mot-khoi{
             margin: 15px 0;
         }
+        .name_category{
+            margin-top: 15px;
+        }
     </style>
-    <div class="container-fluid" id="content">
+    <div class="container" id="content">
         <div class="row">
             <div class="col-md-2">
-                <div class="card bg-primary">
-                    <div class="card-body"><h4 class="text-center">Day la nganh cha</h4></div>
+                <div class="card bg-primary name_category">
+                    <div class="card-body"><h4 class="text-center">Công nghệ thông tin</h4></div>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <div class="row">
-                    <div class="col-md-3" id="mot-khoi">
+                    <div class="col-md-4" id="mot-khoi">
                         <div class="nganh-con">
                             <div class="bg-blur"></div>
                             <a href="">
@@ -75,7 +79,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-3" id="mot-khoi">
+                    <div class="col-md-4" id="mot-khoi">
                         <div class="nganh-con">
                             <div class="bg-blur"></div>
                             <a href="">
@@ -84,7 +88,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-3" id="mot-khoi">
+                    <div class="col-md-4" id="mot-khoi">
                         <div class="nganh-con">
                             <div class="bg-blur"></div>
                             <a href="">
@@ -93,38 +97,10 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-3" id="mot-khoi">
-                        <div class="nganh-con">
-                            <div class="bg-blur"></div>
-                            <a href="">
-                                <img src="{{ asset('img/nganh-con/khoa-hoc-may-tinh.jpg') }}" alt="">
-                                <span class="text-center">Nganh con</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-3" id="mot-khoi">
-                        <div class="nganh-con">
-                            <div class="bg-blur"></div>
-                            <a href="">
-                                <img src="{{ asset('img/nganh-con/khoa-hoc-may-tinh.jpg') }}" alt="">
-                                <span class="text-center">Nganh con</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-3" id="mot-khoi">
-                        <div class="nganh-con">
-                            <div class="bg-blur"></div>
-                            <a href="">
-                                <img src="{{ asset('img/nganh-con/khoa-hoc-may-tinh.jpg') }}" alt="">
-                                <span class="text-center">Nganh con</span>
-                            </a>
-                        </div>
-                    </div>
-
                 </div>
 
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <h3>Day la nganh rieng</h3>
             </div>
         </div>

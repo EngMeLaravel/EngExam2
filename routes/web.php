@@ -18,5 +18,8 @@ Route::prefix('public-library')->group(function (){
 });
 Route::prefix('my-library')->group(function (){
     Route::get('/','MyLibrary@index')->name('get.my_lib.index');
+//    Route::get('/add-category','MyLibrary@add')->name('add_my_categ');
+//    Route::get('/edit-category','MyLibrary@edit')->name('get.my_lib.index');
+//    Route::get('/delete-category','MyLibrary@delete')->name('get.my_lib.index');
 });
 Route::post('/translate', 'HomeController@ajax_translate');
