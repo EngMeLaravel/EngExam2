@@ -16,8 +16,15 @@ class HomeController extends Controller
             $tr = new GoogleTranslate(); // Auto-detected language by default
             $tr->setSource(); // Detect language automatically
             $tr->setTarget('vi');
-            $text = $tr->translate($request->keyword);
-            echo $text;
+            if ($request->keyword != ""){
+                $text = $tr->translate($request->keyword);
+                $voca_array = $request->keyword;
+            }else{
+                $text = "";
+                $voca_array = "";
+            }
+            $data = array('text' => $text, 'voca_array' => $voca_array);
+            echo json_encode($data);
         }
     }
 }
