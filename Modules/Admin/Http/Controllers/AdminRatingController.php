@@ -2,14 +2,12 @@
 
 namespace Modules\Admin\Http\Controllers;
 
-use App\Models\Contact;
 use App\Models\Rating;
-use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
-class AdminController extends Controller
+class AdminRatingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +15,13 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $ratings = Rating::with('user:id,name', 'product:id,pro_name')->paginate(10);
 
-        return view('admin::index');
+        $viewData = [
+            'ratings' => $ratings,
+        ];
+
+        return view('admin::rating.index', $viewData);
     }
 
 }
