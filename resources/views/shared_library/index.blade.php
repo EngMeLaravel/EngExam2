@@ -12,8 +12,13 @@
         }
         h4{
             margin: 0;
+<<<<<<< HEAD
             padding: 10px;
 
+=======
+            padding: 15px;
+            font-size: 15px;
+>>>>>>> c0c2c303a7948aa18042155712ad0ab6c5d5bc76
         }
         .nganh-con{
             position: relative;
@@ -62,8 +67,11 @@
         #mot-khoi{
             margin: 15px 0;
         }
+        .name_category{
+            margin-top: 15px;
+        }
     </style>
-    <div class="container-fluid" id="content">
+    <div class="container" id="content">
         <div class="row">
             <div class="col-md-2">
                 <div class="card">
@@ -73,11 +81,10 @@
                         <a class="dropdown-item" href="#">Another action</a><br>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
-                </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <div class="row">
-                    <div class="col-md-3" id="mot-khoi">
+                    <div class="col-md-4" id="mot-khoi">
                         <div class="nganh-con">
                             <div class="bg-blur"></div>
                             <a href="">
@@ -86,7 +93,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-3" id="mot-khoi">
+                    <div class="col-md-4" id="mot-khoi">
                         <div class="nganh-con">
                             <div class="bg-blur"></div>
                             <a href="">
@@ -95,7 +102,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-3" id="mot-khoi">
+                    <div class="col-md-4" id="mot-khoi">
                         <div class="nganh-con">
                             <div class="bg-blur"></div>
                             <a href="">
@@ -104,38 +111,10 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-3" id="mot-khoi">
-                        <div class="nganh-con">
-                            <div class="bg-blur"></div>
-                            <a href="">
-                                <img src="{{ asset('img/nganh-con/khoa-hoc-may-tinh.jpg') }}" alt="">
-                                <span class="text-center">Nganh con</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-3" id="mot-khoi">
-                        <div class="nganh-con">
-                            <div class="bg-blur"></div>
-                            <a href="">
-                                <img src="{{ asset('img/nganh-con/khoa-hoc-may-tinh.jpg') }}" alt="">
-                                <span class="text-center">Nganh con</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-3" id="mot-khoi">
-                        <div class="nganh-con">
-                            <div class="bg-blur"></div>
-                            <a href="">
-                                <img src="{{ asset('img/nganh-con/khoa-hoc-may-tinh.jpg') }}" alt="">
-                                <span class="text-center">Nganh con</span>
-                            </a>
-                        </div>
-                    </div>
-
                 </div>
 
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <h3>Day la nganh rieng</h3>
             </div>
         </div>
