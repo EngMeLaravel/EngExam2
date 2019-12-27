@@ -66,6 +66,7 @@
                     <a href="{{ route('admin.home') }}">Trang Chu <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="{{ \Request::route()->getName() == 'admin.get.list.category' ? 'active' : '' }}"><a href="{{ route('admin.get.list.category') }}">Danh Muc</a></li>
+                <li class="{{ \Request::route()->getName() == 'admin.get.list.category' ? 'active' : '' }}"><a href="{{ route('admin.get.list.category') }}">Danh Muc Con</a></li>
                 <li class="{{ \Request::route()->getName() == 'admin.get.list.user' ? 'active' : '' }}"><a href="{{ route('admin.get.list.user') }}">Thanh Vien</a></li>
                 <li class="{{ \Request::route()->getName() == 'admin.get.list.contact' ? 'active' : '' }}"><a href="{{ route('admin.get.list.contact') }}">Lien He</a></li>
             </ul>

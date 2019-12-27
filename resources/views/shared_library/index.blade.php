@@ -1,13 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         #content{
             margin-top: 20px;
         }
+        .card-body{
+            cursor: pointer;
+        }
         h4{
             margin: 0;
-            padding: 15px;
+            padding: 10px;
+
         }
         .nganh-con{
             position: relative;
@@ -60,8 +66,13 @@
     <div class="container-fluid" id="content">
         <div class="row">
             <div class="col-md-2">
-                <div class="card bg-primary">
-                    <div class="card-body"><h4 class="text-center">Day la nganh cha</h4></div>
+                <div class="card">
+                    <button type="button" class="btn btn-primary"><h4>Day la nganh cha</h4></button>
+                    <div class="dropdown-menu dropdown-menu-sm" id="context-menu">
+                        <a class="dropdown-item" href="#">Action</a><br>
+                        <a class="dropdown-item" href="#">Another action</a><br>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
                 </div>
             </div>
             <div class="col-md-8">
@@ -129,4 +140,26 @@
             </div>
         </div>
     </div>
+
+@endsection
+@section('script')
+    <script>
+        $('.card').on('contextmenu', function(e) {
+            var top = e.pageY;
+            var left = e.pageX;
+            $("#context-menu").css({
+                display: "block",
+                top: top,
+                left: left
+            }).addClass("show");
+            return false; //blocks default Webbrowser right click menu
+        }).on("click", function() {
+            $("#context-menu").removeClass("show").hide();
+        });
+
+        $("#context-menu a").on("click", function() {
+            $(this).parent().removeClass("show").hide();
+        });
+
+    </script>
 @endsection

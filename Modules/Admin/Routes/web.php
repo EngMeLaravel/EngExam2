@@ -38,6 +38,21 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(
         );
 
         Route::group(
+            ['prefix' => 'sub-category'],
+            function () {
+                Route::get('/', 'AdminCategoryController@index')->name('admin.get.list.category');
+
+                Route::get('/create', 'AdminCategoryController@create')->name('admin.get.create.category');
+                Route::post('/create', 'AdminCategoryController@store');
+
+                Route::get('/update/{id}', 'AdminCategoryController@edit')->name('admin.get.edit.category');
+                Route::post('/update/{id}', 'AdminCategoryController@update');
+
+                Route::get('/{action}/{id}', 'AdminCategoryController@action')->name('admin.get.action.category');
+            }
+        );
+
+        Route::group(
             ['prefix' => 'user'],
             function () {
                 Route::get('/', 'AdminUserController@index')->name('admin.get.list.user');

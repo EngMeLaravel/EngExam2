@@ -57,11 +57,6 @@
     ============================================ -->
     <link rel="stylesheet" href="{{asset('css/meanmenu.min.css')}}">
 
-    <!-- nivo slider CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('custom-slider/css/nivo-slider.css')}}" type="text/css" />
-    <link rel="stylesheet" href="{{asset('custom-slider/css/preview.css')}}" type="text/css" media="screen" />
-
     <!-- animate CSS
    ============================================ -->
     <link rel="stylesheet" href="{{asset('css/animate.css')}}">
@@ -130,16 +125,12 @@
 
 <!-- jquery-1.11.3.min js
 ============================================ -->
-<script src="{{asset('js/vendor/jquery-1.11.3.min.js')}}"></script>
+<script src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
+<script src="{{asset('js/jquery.contextMenu.min.js')}}"></script>
 
 <!-- bootstrap js
 ============================================ -->
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
-
-<!-- Nivo slider js
-============================================ -->
-<script src="{{asset('custom-slider/js/jquery.nivo.slider.js')}}" type="text/javascript"></script>
-<script src="{{asset('custom-slider/home.js')}}" type="text/javascript"></script>
 
 <!-- owl.carousel.min js
 ============================================ -->
