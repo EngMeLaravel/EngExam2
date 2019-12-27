@@ -16,5 +16,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::prefix('public-library')->group(function (){
     Route::get('/','PublicLibrary@index')->name('get.public_lib.index');
 });
-
+Route::prefix('my-library')->group(function (){
+    Route::get('/','MyLibrary@index')->name('get.my_lib.index');
+});
 Route::post('/translate', 'HomeController@ajax_translate');
