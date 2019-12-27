@@ -2,34 +2,25 @@
     @csrf
     <div class="form-group">
         <label for="c_name">Tên Danh Mục:</label>
-        <input type="text" class="form-control" id="c_name" placeholder="Ten Danh Muc" value="{{old('c_name',isset($category->c_name) ? $category->c_name : '')}}" name="c_name">
-        @if ($errors->has('c_name'))
+        <input type="text" class="form-control" id="c_name" placeholder="Ten Danh Muc" value="{{old('cate_name',isset($category->cate_name) ? $category->cate_name : '')}}" name="cate_name">
+        @if ($errors->has('cate_name'))
             <span class="error-text">
-                {{$errors->first('c_name')}}
+                {{$errors->first('cate_name')}}
             </span>
         @endif
     </div>
     <div class="form-group">
-        <label for="c_icon">Icon:</label>
-        <input type="text" class="form-control" id="c_icon" placeholder="fa fa-home" value="{{old('c_icon',isset($category->c_icon) ? $category->c_icon : '')}}" name="c_icon">
-        @if ($errors->has('c_icon'))
+        <label for="input_img">Avatar:</label>
+        <input type="file" name="cate_avatar" id="input_img" class="form-control"
+               value="{{old('cate_avatar',isset($category->cate_avatar) ? $category->cate_avatar : '')}}">
+        @if ($errors->has('cate_avatar'))
             <span class="error-text">
-                {{$errors->first('c_icon')}}
+                {{$errors->first('cate_avatar')}}
             </span>
         @endif
     </div>
     <div class="form-group">
-        <label for="icon">Meta Title:</label>
-        <input type="text" class="form-control" id="icon" placeholder="Meta Title " value="{{old('c_title_seo',isset($category->c_title_seo) ? $category->c_title_seo : '')}}" name="c_title_seo">
-    </div>
-    <div class="form-group">
-        <label for="icon">Meta Description:</label>
-        <input type="text" class="form-control" id="icon" placeholder="Meta Description " value="{{old('c_description_seo',isset($category->c_description_seo) ? $category->c_description_seo : '')}}" name="c_description_seo">
-    </div>
-    <div class="form-group">
-        <div class="checkbox">
-            <label><input type="checkbox" name="hot"> Nổi bật </label>
-        </div>
+        <img src="{{isset($category->cate_avatar) ? pare_url_file($category->cate_avatar) : asset('img/no-image-available-grid.jpg')}}" id="output_img" alt="" style="width: 500px;">
     </div>
     <button type="submit" class="btn btn-success"> Lưu Thông Tin </button>
 </form>

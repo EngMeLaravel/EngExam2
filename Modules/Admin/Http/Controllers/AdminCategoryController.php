@@ -2,19 +2,16 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Categories;
 use App\Http\Requests\RequestCategory;
-use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Log;
-use PhpParser\Node\Stmt\TryCatch;
 
 class AdminCategoryController extends Controller
 {
     public function index()
     {
-        $categories      =  Category::select('id', 'c_name', 'c_title_seo', 'c_active', 'c_home')->paginate(10);
+        $categories      =  Categories::select('id', 'cate_name', 'cate_active', 'cate_avatar')->paginate(10);
         $viewData        =  [
             'categories' => $categories,
         ];
@@ -34,7 +31,7 @@ class AdminCategoryController extends Controller
 
     public function edit($id)
     {
-        $category = Category::find($id);
+        $category = Categories::find($id);
         return view('admin::category.update', compact('category'));
     }
 
@@ -48,17 +45,15 @@ class AdminCategoryController extends Controller
     {
         // $code = 1;
         // try {
-            $category = new Category();
+            $category = new Categories();
 
             if ($id) {
-                $category = Category::find($id);
+                $category = Categories::find($id);
             }
 
-            $category->c_name            = $requestCategory->c_name;
-            $category->c_slug            = str_slug($requestCategory->c_name);
-            $category->c_icon            = str_slug($requestCategory->c_icon);
-            $category->c_title_seo       = $requestCategory->c_title_seo ? $requestCategory->c_title_seo : $requestCategory->c_name;
-            $category->c_description_seo = $requestCategory->c_description_seo;
+            $category->cate_name         = $requestCategory->cate_name;
+            $category->cate_slug         = str_slug($requestCategory->cate_name);
+            $category->cate_avatar       = str_slug($requestCategory->cate_avatar);
 
             $category->save();
         // } catch (\Throwable $th) {
@@ -71,17 +66,13 @@ class AdminCategoryController extends Controller
     public function action(Request $request, $action, $id)
     {
         if ($action) {
-            $category = Category::find($id);
+            $category = Categories::find($id);
             switch ($action) {
                 case 'delete':
                     $category->delete();
                     break;
                 case 'active':
-                    $category->c_active = $category->c_active ? 0 : 1;
-                    $category->save();
-                    break;
-                case 'home':
-                    $category->c_home = $category->c_home ? 0 : 1;
+                    $category->cate_active = $category->cate_active ? 0 : 1;
                     $category->save();
                     break;
                 default:
