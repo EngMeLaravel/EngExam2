@@ -25,7 +25,6 @@ class RequestCategory extends FormRequest
     {
         return [
             'cate_name' => 'required|unique:categories,cate_name,' . $this->id,
-//            'cate_avatar'   => 'required|mimes:jpeg,jpg,png,gif',
 
         ];
     }
@@ -35,8 +34,6 @@ class RequestCategory extends FormRequest
         return [
             'cate_name.required' => 'Trường này không được để trống',
             'cate_name.unique'   => 'Tên danh mục đã tồn tại',
-            'cate_avatar.required' => 'Trường này không được để trống',
-//            'cate_avatar.mimes' => 'File phải là file ảnh',
         ];
     }
 }

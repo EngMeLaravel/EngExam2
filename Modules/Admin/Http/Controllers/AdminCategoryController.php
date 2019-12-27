@@ -53,7 +53,16 @@ class AdminCategoryController extends Controller
 
             $category->cate_name         = $requestCategory->cate_name;
             $category->cate_slug         = str_slug($requestCategory->cate_name);
-            $category->cate_avatar       = str_slug($requestCategory->cate_avatar);
+
+            if ($requestCategory->hasFile('cate_avatar')) {
+
+                $file = upload_image('cate_avatar');
+
+                if (isset($file['name'])) {
+                    $category->cate_avatar = $file['name'];
+                }
+
+            }
 
             $category->save();
         // } catch (\Throwable $th) {

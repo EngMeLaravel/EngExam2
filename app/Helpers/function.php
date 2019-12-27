@@ -100,7 +100,7 @@ if (!function_exists('pare_url_file')) {
     function pare_url_file($image, $folder = '')
     {
         if (!$image) {
-            return '/images/no-image.jpg';
+            return '/img/no-image-available-grid.jpg';
         }
         $explode = explode('__', $image);
         if (isset($explode[0])) {
