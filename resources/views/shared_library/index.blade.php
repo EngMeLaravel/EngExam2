@@ -12,13 +12,8 @@
         }
         h4{
             margin: 0;
-<<<<<<< HEAD
             padding: 10px;
-
-=======
-            padding: 15px;
             font-size: 15px;
->>>>>>> c0c2c303a7948aa18042155712ad0ab6c5d5bc76
         }
         .nganh-con{
             position: relative;
@@ -73,14 +68,15 @@
     </style>
     <div class="container" id="content">
         <div class="row">
-            <div class="col-md-2">
-                <div class="card">
-                    <button type="button" class="btn btn-primary"><h4>Day la nganh cha</h4></button>
+            <div class="col-md-2" style="position: unset">
+                <div class="card bg-primary">
+                    <h4>Day la nganh cha</h4>
                     <div class="dropdown-menu dropdown-menu-sm" id="context-menu">
                         <a class="dropdown-item" href="#">Action</a><br>
                         <a class="dropdown-item" href="#">Another action</a><br>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
+                </div>
             </div>
             <div class="col-md-7">
                 <div class="row">
@@ -126,6 +122,7 @@
         $('.card').on('contextmenu', function(e) {
             var top = e.pageY;
             var left = e.pageX;
+            console.log(top, left)
             $("#context-menu").css({
                 display: "block",
                 top: top,

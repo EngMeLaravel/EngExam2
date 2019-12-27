@@ -28,4 +28,9 @@ class Categories extends Model
         return array_get($this->status, $this->cate_active, '[N\A]');
     }
 
+    public function sub_categories()
+    {
+        return $this->hasMany(SubCategories::class);
+    }
+
 }
