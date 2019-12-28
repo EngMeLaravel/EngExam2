@@ -9,6 +9,7 @@ class CheckLoginUser
     {
         if (!get_data_user('web'))
         {
+
             return redirect()->route('get.login');
         }
 
