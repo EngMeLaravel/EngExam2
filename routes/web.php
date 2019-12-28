@@ -34,6 +34,7 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::prefix('public-library')->group(function (){
     Route::get('/','PublicLibrary@index')->name('get.public_lib.index');
+    Route::get('/show-subcategory/{id}','PublicLibrary@show')->name('show_subcategory.public_lib.index');
     Route::post('/edit-category','PublicLibrary@save')->name('save.public_lib.index');
     Route::post('/delete-category','PublicLibrary@delete')->name('delete.public_lib.index');
 });

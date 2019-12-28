@@ -7,20 +7,38 @@
         #content{
             margin-top: 20px;
         }
-        .card-body{
+        .card{
+            margin-bottom: 15px;
+            border-radius: 4px;
             cursor: pointer;
+            width: 100%;
+            height: 60px;
         }
-        h4{
+        #content a.name_cate {
             margin: 0;
-<<<<<<< HEAD
-            padding: 10px;
-            font-size: 15px;
-=======
-            padding: 5px;
-            font-size: 15px;
-            padding: 9px;
             text-align: center;
->>>>>>> 2238dfc2946ec68585f69249279b9ff295f6d62c
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        div#context-menu {
+            line-height: 15px;
+            background: #eeeeee;
+            margin: 0;
+        }
+
+        div#context-menu a {
+            padding: 7px 20px;
+            display: block;
+            color: black;
+        }
+
+        div#context-menu a:hover {
+            background: white;
         }
         .nganh-con{
             position: relative;
@@ -73,29 +91,6 @@
         #mot-khoi{
             margin: 15px 0;
         }
-        .name_category{
-            margin-top: 15px;
-        }
-        .card{
-            margin-bottom: 15px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        div#context-menu {
-            line-height: 15px;
-            background: #eeeeee;
-            margin: 0;
-        }
-
-        div#context-menu a {
-            padding: 7px 20px;
-            display: block;
-            color: black;
-        }
-
-        div#context-menu a:hover {
-            background: white;
-        }
         .input_same {
             width: 100%;
             border-radius: 4px;
@@ -110,9 +105,8 @@
             <div class="col-md-2" style="position: unset;margin-top: 15px;">
                 @if(isset($category))
                     @foreach($category as $category_item)
-                        <div class="card">
-                            <img src="" alt="">
-                            <h4>{{ $category_item->cate_name }}</h4>
+                        <div class="card" style="background-image: url({{ pare_url_file($category_item->cate_avatar) }});">
+                            <a class="name_cate" href="{{ route("show_subcategory.public_lib.index",$category_item->id) }}">{{ $category_item->cate_name }}</a>
                             <div class="dropdown-menu dropdown-menu-sm" id="context-menu" style="">
                                 <a id="edit_category" data-toggle="modal" data-target="#editcategory" data-id="{{ $category_item->id }}" data-name="{{ $category_item->cate_name }}" class="dropdown-item" href="#">Sửa</a>
                                 <a id="delete_category" data-toggle="modal" data-target="#deletecategory" data-id="{{ $category_item->id }}" class="dropdown-item" href="#">Xóa</a>
@@ -126,33 +120,22 @@
             </div>
             <div class="col-md-7">
                 <div class="row">
-                    <div class="col-md-4" id="mot-khoi">
-                        <div class="nganh-con">
-                            <div class="bg-blur"></div>
-                            <a href="">
-                                <img src="" alt="">
-                                <span class="text-center">Khoa học Máy tính</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-4" id="mot-khoi">
-                        <div class="nganh-con">
-                            <div class="bg-blur"></div>
-                            <a href="">
-                                <img src="" alt="">
-                                <span class="text-center">Khoa học Máy tính</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-4" id="mot-khoi">
-                        <div class="nganh-con">
-                            <div class="bg-blur"></div>
-                            <a href="">
-                                <img src="" alt="">
-                                <span class="text-center">Khoa học Máy tính</span>
-                            </a>
-                        </div>
-                    </div>
+                    <?php $subcategory = Session::get('subcategory'); ?>
+                    @if(Session::has('subcategory') && $subcategory != "")
+                        @foreach($subcategory as $sub_category_item)
+                            <div class="col-md-4" id="mot-khoi">
+                                <div class="nganh-con">
+                                    <div class="bg-blur"></div>
+                                    <a href="">
+                                        <img src="{{ pare_url_file($sub_category_item->subcate_avatar) }}" alt="">
+                                        <span class="text-center">{{ $sub_category_item->subcate_name  }}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
+                        @else
+                        Chưa có danh mục con nào
+                    @endif
                 </div>
 
             </div>

@@ -14,6 +14,11 @@ class PublicLibrary extends Controller
         return view('shared_library.index',compact('category'));
     }
 
+    public function show($id){
+        $subcategory = SubCategories::all()->where('cate_id',$id);
+        return redirect()->route('get.public_lib.index')->with( ['subcategory' => $subcategory] );
+    }
+
     public function save(Request $request){
         $cate_id   =  $request->cate_id;
         $cate_name = $request->cate_name;
