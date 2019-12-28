@@ -47,7 +47,7 @@
                     <tr>
                         <td>{{ $sub_category->id }}</td>
                         <td>{{ $sub_category->subcate_name }}</td>
-                        <td>{{ $sub_category->cate_id }}</td>
+                        <td>{{ isset($sub_category->categories->cate_name) ? $sub_category->categories->cate_name : '[N\A]' }}</td>
                         <td>
                             <img src="{{ pare_url_file($sub_category->subcate_avatar) }}" alt="" class="img img-responsive" style="width: 120px;height: 120px;">
                         </td>
