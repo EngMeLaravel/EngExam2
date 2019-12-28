@@ -15,11 +15,13 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::prefix('public-library')->group(function (){
     Route::get('/','PublicLibrary@index')->name('get.public_lib.index');
+    Route::post('/edit-category','PublicLibrary@save')->name('save.public_lib.index');
+    Route::post('/delete-category','PublicLibrary@delete')->name('delete.public_lib.index');
 });
 Route::prefix('my-library')->group(function (){
     Route::get('/','MyLibrary@index')->name('get.my_lib.index');
 //    Route::get('/add-category','MyLibrary@add')->name('add_my_categ');
-//    Route::get('/edit-category','MyLibrary@edit')->name('get.my_lib.index');
+//    Route::post('/edit-category','MyLibrary@save')->name('save.my_lib.index');
 //    Route::get('/delete-category','MyLibrary@delete')->name('get.my_lib.index');
 });
 Route::post('/translate', 'HomeController@ajax_translate');

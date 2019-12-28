@@ -22,5 +22,23 @@
     <div class="form-group">
         <img src="{{isset($sub_category->subcate_avatar) ? pare_url_file($sub_category->subcate_avatar) : asset('img/no-image-available-grid.jpg')}}" id="output_img" alt="" style="width: 500px;">
     </div>
+    <div class="form-group">
+        <label for="cate_id">Loại ngành cha:</label>
+        <select name="cate_id" id="cate_id" class="form-control">
+            <option value="">--Chọn loại ngành cha--</option>
+            @if (isset($categories))
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}"
+                        {{old('cate_id',isset($category->cate_id) ? $category->cate_id : '')
+                        == $category->id ? "selected='selected'" : ""}}>{{ $category->cate_name }}</option>
+                @endforeach
+            @endif
+        </select>
+        @if ($errors->has('cate_id'))
+            <span class="error-text">
+            {{$errors->first('cate_id')}}
+        </span>
+        @endif
+    </div>
     <button type="submit" class="btn btn-success"> Lưu Thông Tin </button>
 </form>

@@ -17,7 +17,7 @@ class AdminSubCategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $sub_categories = Categories::with('categories:id,cate_name');
+        $sub_categories = SubCategories::with('categories:id,cate_name');
 
         if ($request->name) {
             $sub_categories->where('cate_name', 'like', '%'.$request->name.'%');
@@ -27,7 +27,7 @@ class AdminSubCategoryController extends Controller
             $sub_categories->where('cate_id', $request->cate);
         }
 
-        $sub_categories = $sub_categories->orderByDesc('id')->paginate(10);
+        $sub_categories = $sub_categories->orderByDesc('id')->get();
 
         $categories = $this->getCategories();
 
@@ -45,7 +45,8 @@ class AdminSubCategoryController extends Controller
 
     public function create()
     {
-        return view('admin::sub_category.create');
+        $categories = $this->getCategories();
+        return view('admin::sub_category.create', compact('categories'));
     }
 
     public function store(RequestSubCategory $requestSubCategory)
@@ -57,7 +58,8 @@ class AdminSubCategoryController extends Controller
     public function edit($id)
     {
         $sub_category = SubCategories::find($id);
-        return view('admin::sub_category.update', compact('sub_category'));
+        $categories = $this->getCategories();
+        return view('admin::sub_category.update', compact('sub_category', 'categories'));
     }
 
     public function update(RequestSubCategory $requestSubCategory, $id)
@@ -78,6 +80,7 @@ class AdminSubCategoryController extends Controller
 
         $sub_category->subcate_name         = $requestSubCategory->subcate_name;
         $sub_category->subcate_slug         = str_slug($requestSubCategory->subcate_name);
+        $sub_category->cate_id              = $requestSubCategory->cate_id;
 
         if ($requestSubCategory->hasFile('subcate_avatar')) {
 

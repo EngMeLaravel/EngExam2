@@ -108,14 +108,20 @@
         <h3 class="text-center" style="color: black;margin-bottom: 20px;">Thư viện chung</h3>
         <div class="row">
             <div class="col-md-2" style="position: unset;margin-top: 15px;">
-                <div class="card bg-primary">
-                    <h4>Công nghệ thông tin</h4>
-                    <div class="dropdown-menu dropdown-menu-sm" id="context-menu" style="">
-                        <a id="edit_category" data-toggle="modal" data-target="#editcategory" class="dropdown-item" href="#">Sửa</a>
-                        <a id="delete_category" data-toggle="modal" data-target="#deletecategory" class="dropdown-item" href="#">Xóa</a>
-                        <a id="add_sub_category" data-toggle="modal" data-target="#addsubcategory" class="dropdown-item" href="#">Thêm ngành con</a>
-                    </div>
-                </div>
+                @if(isset($category))
+                    @foreach($category as $category_item)
+                        <div class="card bg-primary">
+                            <h4>{{ $category_item->cate_name }}</h4>
+                            <div class="dropdown-menu dropdown-menu-sm" id="context-menu" style="">
+                                <a id="edit_category" data-toggle="modal" data-target="#editcategory" data-id="{{ $category_item->id }}" data-name="{{ $category_item->cate_name }}" class="dropdown-item" href="#">Sửa</a>
+                                <a id="delete_category" data-toggle="modal" data-target="#deletecategory" data-id="{{ $category_item->id }}" class="dropdown-item" href="#">Xóa</a>
+                                <a id="add_sub_category" data-toggle="modal" data-target="#addsubcategory" class="dropdown-item" href="#">Thêm ngành con</a>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    Chưa có danh mục
+                @endif
             </div>
             <div class="col-md-7">
                 <div class="row">
@@ -172,13 +178,17 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Sửa nhóm cha</h4>
                 </div>
-                <div class="modal-body">
-                    <input class="input_same" type="text">
-                </div>
-                <div class="modal-footer">
-                    <a href="google.com" type="button" class="btn btn-primary">Lưu</a>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
-                </div>
+                <form action="{{ route('save.public_lib.index')  }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <input id="cate_name" class="input_same" type="text" name="cate_name">
+                        <input type="hidden" id="cate_id" name="cate_id">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" name="save_cate">Lưu</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -208,30 +218,51 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <img src="{{ asset("img/cancel.png") }}" alt="">
                 </div>
-                <div class="modal-body">
-                    <h4 class="modal-title text-center">Bạn có chắc là muốn xóa nhóm này không?</h4>
-                </div>
-                <div class="modal-footer" style="border-top: none">
-                    <a href="google.com" type="button" class="btn btn-primary">Có</a>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
-                </div>
+                <form action="{{ route('delete.public_lib.index')  }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <h4 class="modal-title text-center">Bạn có chắc là muốn xóa nhóm này không?</h4>
+                        <input type="hidden" id="cate_id" name="cate_id">
+                    </div>
+                    <div class="modal-footer" style="border-top: none">
+                        <button type="submit" class="btn btn-primary">Có</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 @endsection
 @section('script')
+    // pass cate_id va cate_name vao input trong modal #editcategory
+    <script>
+        $(document).on("click", "#edit_category", function () {
+            var cate_id   = $(this).data('id');
+            var cate_name = $(this).data('name');
+            $(".modal-body #cate_id").val( cate_id );
+            $(".modal-body #cate_name").val( cate_name );
+            // As pointed out in comments,
+            // it is unnecessary to have to manually call the modal.
+            // $('#addBookDialog').modal('show');
+        });
+    </script>
+    // pass cate_id input trong modal #deletecategory
+    <script>
+        $(document).on("click", "#delete_category", function () {
+            var cate_id   = $(this).data('id');
+            $(".modal-body #cate_id").val( cate_id );
+            // As pointed out in comments,
+            // it is unnecessary to have to manually call the modal.
+            // $('#addBookDialog').modal('show');
+        });
+    </script>
     <script>
         $('.card').on('contextmenu', function(e) {
             $(this).prevAll().find("#context-menu").removeClass("show").hide();
             $(this).nextAll().find("#context-menu").removeClass("show").hide();
             var top = e.pageY;
             var left = e.pageX;
-<<<<<<< HEAD
-            console.log(top, left)
-            $("#context-menu").css({
-=======
             $(this).find('#context-menu').css({
->>>>>>> 2238dfc2946ec68585f69249279b9ff295f6d62c
                 display: "block",
                 top: top,
                 left: left
