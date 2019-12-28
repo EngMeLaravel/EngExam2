@@ -110,7 +110,8 @@
             <div class="col-md-2" style="position: unset;margin-top: 15px;">
                 @if(isset($category))
                     @foreach($category as $category_item)
-                        <div class="card bg-primary">
+                        <div class="card">
+                            <img src="" alt="">
                             <h4>{{ $category_item->cate_name }}</h4>
                             <div class="dropdown-menu dropdown-menu-sm" id="context-menu" style="">
                                 <a id="edit_category" data-toggle="modal" data-target="#editcategory" data-id="{{ $category_item->id }}" data-name="{{ $category_item->cate_name }}" class="dropdown-item" href="#">Sửa</a>
@@ -129,7 +130,7 @@
                         <div class="nganh-con">
                             <div class="bg-blur"></div>
                             <a href="">
-                                <img src="{{ asset('img/nganh-con/khoa-hoc-may-tinh.jpg') }}" alt="">
+                                <img src="" alt="">
                                 <span class="text-center">Khoa học Máy tính</span>
                             </a>
                         </div>
@@ -138,8 +139,8 @@
                         <div class="nganh-con">
                             <div class="bg-blur"></div>
                             <a href="">
-                                <img src="{{ asset('img/nganh-con/khoa-hoc-may-tinh.jpg') }}" alt="">
-                                <span class="text-center">Nganh con</span>
+                                <img src="" alt="">
+                                <span class="text-center">Khoa học Máy tính</span>
                             </a>
                         </div>
                     </div>
@@ -147,8 +148,8 @@
                         <div class="nganh-con">
                             <div class="bg-blur"></div>
                             <a href="">
-                                <img src="{{ asset('img/nganh-con/khoa-hoc-may-tinh.jpg') }}" alt="">
-                                <span class="text-center">Nganh con</span>
+                                <img src="" alt="">
+                                <span class="text-center">Khoa học Máy tính</span>
                             </a>
                         </div>
                     </div>
