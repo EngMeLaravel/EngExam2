@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Carbon\Carbon;
@@ -89,7 +91,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name'     => 'required|string|max      : 255',
             'email'    => 'required|string|email|max: 255|unique: users',
-            'password' => 'required|string|min      : 6|confirmed',
+            'password' => 'required|string|min      : 6|confi   rmed',
         ]);
     }
 
