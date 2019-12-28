@@ -11,6 +11,18 @@ use Illuminate\Routing\Controller;
 
 class AdminSubCategoryController extends Controller
 {
+    public function create()
+    {
+        $categories = $this->getCategories();
+        return view('admin::sub_category.create', compact('categories'));
+    }
+
+    public function store(RequestSubCategory $requestSubCategory)
+    {
+        $this->insertOrUpdate($requestSubCategory);
+        return redirect()->back();
+    }
+
     /**
      * Display a listing of the resource.
      * @return Response
@@ -61,63 +73,5 @@ class AdminSubCategoryController extends Controller
         $categories = $this->getCategories();
         return view('admin::sub_category.update', compact('sub_category', 'categories'));
     }
-
-    public function update(RequestSubCategory $requestSubCategory, $id)
-    {
-        $this->insertOrUpdate($requestSubCategory, $id);
-        return redirect()->back();
-    }
-
-    public function insertOrUpdate($requestSubCategory, $id = '')
-    {
-        // $code = 1;
-        // try {
-        $sub_category = new SubCategories();
-
-        if ($id) {
-            $sub_category = SubCategories::find($id);
         }
 
-        $sub_category->subcate_name         = $requestSubCategory->subcate_name;
-        $sub_category->subcate_slug         = str_slug($requestSubCategory->subcate_name);
-        $sub_category->cate_id              = $requestSubCategory->cate_id;
-
-        if ($requestSubCategory->hasFile('subcate_avatar')) {
-
-            $file = upload_image('subcate_avatar');
-
-            if (isset($file['name'])) {
-                $sub_category->subcate_avatar = $file['name'];
-            }
-
-        }
-
-        $sub_category->save();
-        // } catch (\Throwable $th) {
-        //     $code = 0;
-        //     Log::error(' [Error insertOrUpdate Category] ' . $th->getMessage());
-        // }
-        // return $code;
-    }
-
-    public function action(Request $request, $action, $id)
-    {
-        if ($action) {
-            $sub_category = SubCategories::find($id);
-            switch ($action) {
-                case 'delete':
-                    $sub_category->delete();
-                    break;
-                case 'active':
-                    $sub_category->subcate_active = $sub_category->subcate_active ? 0 : 1;
-                    $sub_category->save();
-                    break;
-                default:
-                    # code...
-                    break;
-            }
-        }
-
-        return redirect()->back();
-    }
-}

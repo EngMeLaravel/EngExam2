@@ -2,7 +2,7 @@
     @csrf
     <div class="form-group">
         <label for="c_name">Tên Danh Mục Con:</label>
-        <input type="text" class="form-control" id="c_name" placeholder="Ten Danh Muc" value="{{old('cate_name',isset($sub_category->subcate_name) ? $sub_category->subcate_name : '')}}" name="subcate_name">
+        <input type="text" class="form-control" id="c_name" placeholder="Ten Danh Muc" value="{{old('subcate_name',isset($sub_category->subcate_name) ? $sub_category->subcate_name : '')}}" name="subcate_name">
         @if ($errors->has('subcate_name'))
             <span class="error-text">
                 {{$errors->first('subcate_name')}}
