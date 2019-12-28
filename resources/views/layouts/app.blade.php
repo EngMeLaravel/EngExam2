@@ -115,6 +115,7 @@
     @endif
 
 </div>
+
 @include('components.header')
 <!-- header area end -->
 @yield('content')

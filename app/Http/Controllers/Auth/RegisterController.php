@@ -23,35 +23,71 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function getRegister()
     {
-        $this->middleware('guest');
+        return view('auth.register');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
+    public function postRegister(Request $request)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->phone = $request->phone;
+        $user->save();
+
+        if ($user->id)
+        {
+            $email = $user->email;
+
+            $code = bcrypt(md5(time().$email));
+            $url = route('user.verify.account',['id' => $user->id,'code' => $code]);
+
+            $user->code_active = $code;
+            $user->time_active = Carbon::now();
+            $user->save();
+
+            $data = [
+                'route' => $url
+            ];
+
+            Mail::send('email.verify_account', $data, function($message) use ($email) {
+                $message->to($email, 'Eng Me')->subject('Xác nhận tài khoản!');
+            });
+
+            return redirect()->route('get.login');
+        }
+        return redirect()->back();
+    }
+
+    public function verifyAccount(Request $request)
+    {
+        $code = $request->code;
+        $id = $request->id;
+
+        $checkUser = User::where([
+            'code_active' => $code,
+            'id' => $id
+        ])->first();
+
+        if (!$checkUser)
+        {
+            return redirect('/')->with('danger','Xin lỗi! Đường dẫn xác nhận mật khẩu không tồn tại, vui lòng thử lại');
+        }
+
+        $checkUser->active = 2;
+        $checkUser->save();
+
+        return redirect('/')->with('success','Xác nhận tài khoản thành công!');
+    }
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'name'     => 'required|string|max      : 255',
+            'email'    => 'required|string|email|max: 255|unique: users',
+            'password' => 'required|string|min      : 6|confirmed',
         ]);
     }
 
@@ -64,8 +100,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name'     => $data['name'],
+            'email'    => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
     }

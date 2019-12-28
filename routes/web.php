@@ -11,6 +11,25 @@
 |
 */
 
+Auth::routes();
+Route::group(['namespace' => 'Auth'], function () {
+    Route::get('dang-ky', 'RegisterController@getRegister')->name('get.register');
+    Route::post('dang-ky', 'RegisterController@postRegister')->name('post.register');
+
+    Route::get('xac-nhan-tai-khoan', 'RegisterController@verifyAccount')->name('user.verify.account');
+
+    Route::get('dang-nhap', 'LoginController@getLogin')->name('get.login');
+    Route::post('dang-nhap', 'LoginController@postLogin')->name('post.login');
+
+    Route::get('dang-xuat', 'LoginController@getLogout')->name('get.logout.user');
+
+    Route::get('/lay-lai-mat-khau','ForgotPasswordController@getFormResetPassword')->name('get.reset.password');
+    Route::post('/lay-lai-mat-khau','ForgotPasswordController@sendCodeResetPassword');
+
+    Route::get('/password/reset','ForgotPasswordController@resetPassword')->name('get.link.reset.password');
+    Route::post('/password/reset','ForgotPasswordController@saveResetPassword');
+});
+
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::prefix('public-library')->group(function (){
@@ -19,7 +38,7 @@ Route::prefix('public-library')->group(function (){
     Route::post('/edit-category','PublicLibrary@save')->name('save.public_lib.index');
     Route::post('/delete-category','PublicLibrary@delete')->name('delete.public_lib.index');
 });
-Route::prefix('my-library')->group(function (){
+Route::prefix('my-library')->middleware('CheckLoginUser')->group(function (){
     Route::get('/','MyLibrary@index')->name('get.my_lib.index');
 //    Route::get('/add-category','MyLibrary@add')->name('add_my_categ');
 //    Route::post('/edit-category','MyLibrary@save')->name('save.my_lib.index');
