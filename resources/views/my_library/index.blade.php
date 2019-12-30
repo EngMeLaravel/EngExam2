@@ -131,6 +131,7 @@
         }
     </style>
     <div class="container" id="content">
+        <?php echo get_data_user('web') ?>
         <h3 class="text-center" style="color: black;">Kho cá nhân</h3>
         <div class="row">
             <div class="col-md-3">
@@ -161,9 +162,9 @@
             </div>
             <div class="col-md-7">
                 <div class="row">
-                    <?php $subcategory = Session::get('subcategory'); ?>
+                    <?php $mysubcategory = Session::get('subcategory'); ?>
                     @if(Session::has('subcategory') && $subcategory != "")
-                        @foreach($subcategory as $sub_category_item)
+                        @foreach($mysubcategory as $sub_category_item)
                             <div class="col-md-4" id="mot-khoi">
                                 <div class="nganh-con">
                                     <div class="bg-blur"></div>
