@@ -35,14 +35,18 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::prefix('public-library')->group(function (){
     Route::get('/','PublicLibrary@index')->name('get.public_lib.index');
     Route::get('/show-subcategory/{id}','PublicLibrary@show')->name('show_subcategory.public_lib.index');
-    Route::post('/edit-category','PublicLibrary@save')->name('save.public_lib.index');
-    Route::post('/delete-category','PublicLibrary@delete')->name('delete.public_lib.index');
 });
 
 Route::prefix('my-library')->middleware('CheckLoginUser')->group(function (){
     Route::get('/','MyLibrary@index')->name('get.my_lib.index');
+    Route::post('/add-category','MyLibrary@add')->name('add.my_lib.index');
     Route::post('/edit-category','MyLibrary@save')->name('save.my_lib.index');
     Route::post('/delete-category','MyLibrary@delete')->name('delete.my_lib.index');
+
+    Route::get('/show-mysubcategory/{id}','MyLibrary@show')->name('show_mysubcategory.my_lib.index');
+    Route::post('/add-sub-cate-category','MyLibrary@addsubcate')->name('addsubcate.my_lib.index');
+    Route::post('/edit-sub-cate-category','MyLibrary@savesubcate')->name('savesubcate.my_lib.index');
+    Route::post('/delete-sub-cate-category','MyLibrary@deletesubcate')->name('deletesubcate.my_lib.index');
 });
 
 
