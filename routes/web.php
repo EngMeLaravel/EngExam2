@@ -35,6 +35,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::prefix('public-library')->group(function (){
     Route::get('/','PublicLibrary@index')->name('get.public_lib.index');
     Route::get('/show-subcategory/{id}','PublicLibrary@show')->name('show_subcategory.public_lib.index');
+    Route::get('/show-subcategory/{cate_id}-{subcate_id}','PublicLibrary@getVocabularies')->name('get_vocabularies.public_lib.index');
 });
 
 Route::prefix('my-library')->middleware('CheckLoginUser')->group(function (){

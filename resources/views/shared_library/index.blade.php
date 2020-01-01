@@ -102,11 +102,30 @@
     </style>
     <div class="container" id="content">
         <h3 class="text-center" style="color: black;margin-bottom: 20px;">Thư viện chung</h3>
+{{--        <div class="breadcrumbs">--}}
+{{--            <div class="container">--}}
+{{--                <div class="row">--}}
+{{--                    <div class="col-md-12">--}}
+{{--                        <div class="container-inner">--}}
+{{--                            <ul>--}}
+{{--                                <li class="home">--}}
+{{--                                    <a href="/">Trang chủ</a>--}}
+{{--                                    <span><i class="fa fa-angle-right"></i></span>--}}
+{{--                                </li>--}}
+{{--                                <li class="category3"><span>Thư viện chung</span></li>--}}
+{{--                            </ul>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
         <div class="row">
             <div class="col-md-2" style="position: unset;margin-top: 15px;">
                 @if(isset($category))
+                    <? $cate_id = ''; ?>
                     @foreach($category as $category_item)
                         <div class="card" style="background-image: url({{ pare_url_file($category_item->cate_avatar) }});">
+                            <? $cate_id = $category_item->id; ?>
                             <a class="name_cate" href="{{ route("show_subcategory.public_lib.index",$category_item->id) }}">{{ $category_item->cate_name }}</a>
                         </div>
                     @endforeach
@@ -130,11 +149,11 @@
                             </div>
                         @endforeach
                         @else
-                        Chưa có danh mục con nào
+                        @include('vocabulary.detail_voca')
                     @endif
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" style="margin-top: 15px">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title text-center">Từ hot</h3>
