@@ -135,7 +135,7 @@
         <h3 class="text-center" style="color: black;">Kho cá nhân</h3>
         <div class="row">
             <div class="col-md-3">
-                <div class="add_group_voca">
+                    <div class="add_group_voca">
                     <button class="btn-create-folder" data-toggle="modal" data-target="#addGroupVoca">
                         <img src="{{ asset("img/add.png") }}" alt="">
                         <span>Tạo nhóm từ mới</span>

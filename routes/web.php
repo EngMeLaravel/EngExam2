@@ -38,9 +38,12 @@ Route::prefix('public-library')->group(function (){
     Route::post('/edit-category','PublicLibrary@save')->name('save.public_lib.index');
     Route::post('/delete-category','PublicLibrary@delete')->name('delete.public_lib.index');
 });
+
 Route::prefix('my-library')->middleware('CheckLoginUser')->group(function (){
     Route::get('/','MyLibrary@index')->name('get.my_lib.index');
     Route::post('/edit-category','MyLibrary@save')->name('save.my_lib.index');
     Route::post('/delete-category','MyLibrary@delete')->name('delete.my_lib.index');
 });
+
+
 Route::post('/translate', 'HomeController@ajax_translate');

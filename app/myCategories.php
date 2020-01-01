@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class myCategories extends Model
 {
-    protected $table = "mycategories";
+    protected $table = "my_categories";
+    protected $guarded = ['*'];
 }
