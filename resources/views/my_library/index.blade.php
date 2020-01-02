@@ -27,6 +27,7 @@
             width: 100%;
             height: 60px;
             background-size: cover;
+            font-weight: bolder;
         }
 
         #content a.name_cate {

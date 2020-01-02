@@ -1,3 +1,4 @@
+
 <style>
     #voca{
         margin-top: 15px;
@@ -97,13 +98,13 @@
         <div class="like illustration">
             <h5>illustration :</h5>
             <div>
+                <h6>Video:</h6>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/ZAuwjUsiG1Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div>
                 <h6>Image:</h6>
                 <img src="{{ asset('img/others/index.jpeg') }}" alt="">
                 <img src="{{ asset('img/others/giphy.webp') }}" alt="">
-            </div>
-            <div>
-                <h6>Video:</h6>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/ZAuwjUsiG1Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </div>

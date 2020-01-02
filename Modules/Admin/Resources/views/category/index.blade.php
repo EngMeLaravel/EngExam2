@@ -27,7 +27,7 @@
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->cate_name }}</td>
                         <td>
-                            <img src="{{ pare_url_file($category->cate_avatar) }}" alt="" class="img img-responsive" style="width: 120px;height: 120px;">
+                            <img src="{{ pare_url_file($category->cate_avatar) }}" alt="" class="img img-responsive" style="width: 120px;">
                         </td>
                         <td>
                             <a href="{{ route('admin.get.action.category',['active',$category->id]) }}" class="label {{ $category->getStatus($category->c_active)['class'] }}">{{ $category->getStatus($category->c_active)['name'] }}</a>

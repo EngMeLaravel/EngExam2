@@ -17,7 +17,7 @@
                             <li class="expand"><a href="{{ route('get.public_lib.index') }}">Thư viện chung</a></li>
                             <li class="expand"><a href="{{ route('get.my_lib.index') }}">Kho cá nhân</a></li>
                             <li class="expand"><a href="">Giới thiệu</a></li>
-                            <li class="expand"><a href="">Liên hệ</a></li>
+                            <li class="expand"><a href="{{ route('get.contact') }}">Liên hệ</a></li>
                         </ul>
                     </nav>
                 </div>

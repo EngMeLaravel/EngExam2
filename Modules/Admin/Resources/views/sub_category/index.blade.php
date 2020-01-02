@@ -49,7 +49,7 @@
                         <td>{{ $sub_category->subcate_name }}</td>
                         <td>{{ isset($sub_category->categories->cate_name) ? $sub_category->categories->cate_name : '[N\A]' }}</td>
                         <td>
-                            <img src="{{ pare_url_file($sub_category->subcate_avatar) }}" alt="" class="img img-responsive" style="width: 120px;height: 120px;">
+                            <img src="{{ pare_url_file($sub_category->subcate_avatar) }}" alt="" class="img img-responsive" style="width: 120px;">
                         </td>
                         <td>
                             <a href="{{ route('admin.get.action.sub_category',['active',$sub_category->id]) }}" class="label {{ $sub_category->getStatus($sub_category->subcate_active)['class'] }}">{{ $sub_category->getStatus($sub_category->subcate_active)['name'] }}</a>

@@ -17,13 +17,23 @@ class PublicLibrary extends Controller
 
     public function show($id)
     {
+        $category = Categories::all();
         $subcategory = SubCategories::all()->where('cate_id',$id);
-        return redirect()->route('get.public_lib.index')->with( ['subcategory' => $subcategory] );
+        $viewData = [
+            'category' => $category,
+            'subcategory' => $subcategory
+        ];
+        return view('shared_library.index', $viewData);
     }
 
     public function getVocabularies($cate_id, $subcate_id)
     {
-        $vocabularies = Vocabularies::where('cate_id', $cate_id, 'subcate_id', $subcate_id);
-        return view('vocabulary.list_voca', compact('vocabularies'));
+        $category = Categories::all();
+        $vocabularies = Vocabularies::where([['cate_id', $cate_id], ['subcate_id', $subcate_id]])->get();
+        $viewData = [
+            'category' => $category,
+            'vocabularies' => $vocabularies
+        ];
+        return view('shared_library.index', $viewData);
     }
 }
