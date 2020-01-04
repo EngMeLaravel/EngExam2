@@ -54,27 +54,11 @@
                 <div class="col-md-12">
                     <div id="test">
                         <h6>Details vocabulary</h6>
-                        <a href="" id="voca_array0"></a>
-                        <a href="" id="voca_array1"></a>
-                        <a href="" id="voca_array2"></a>
-                        <a href="" id="voca_array3"></a>
-                        <a href="" id="voca_array4"></a>
-                        <a href="" id="voca_array5"></a>
-                        <a href="" id="voca_array6"></a>
-                        <a href="" id="voca_array7"></a>
-                        <a href="" id="voca_array8"></a>
-                        <a href="" id="voca_array9"></a>
-                        <a href="" id="voca_array10"></a>
-                        <a href="" id="voca_array11"></a>
-                        <a href="" id="voca_array12"></a>
-                        <a href="" id="voca_array13"></a>
-                        <a href="" id="voca_array14"></a>
-                        <a href="" id="voca_array15"></a>
-                        <a href="" id="voca_array16"></a>
-                        <a href="" id="voca_array17"></a>
-                        <a href="" id="voca_array18"></a>
-                        <a href="" id="voca_array19"></a>
-                        <a href="" id="voca_array20"></a>
+                        @php
+                            for($i = 0; $i < 100; $i++){
+                                echo "<a href='' id='voca_array$i' style='text-decoration:underline;'></a> ";
+                            }
+                        @endphp
                     </div>
                 </div>
             </div>
