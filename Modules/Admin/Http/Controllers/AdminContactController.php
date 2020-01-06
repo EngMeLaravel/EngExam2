@@ -2,7 +2,7 @@
 
 namespace Modules\Admin\Http\Controllers;
 
-use App\Models\Contact;
+use App\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;

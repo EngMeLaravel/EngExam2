@@ -66,5 +66,21 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(
                 Route::get('/{action}/{id}', 'AdminContactController@action')->name('admin.action.contact');
             }
         );
+
+        Route::group(
+            ['prefix' => 'vocabulary'],
+            function () {
+                Route::get('/', 'AdminVocabularyController@index')->name('admin.get.list.vocabulary');
+                Route::post('/ajax-select-sub-cate', 'AdminVocabularyController@ajaxSubCate')->name('admin.ajax_select_sub_cate.vocabulary');
+
+                Route::get('/create', 'AdminVocabularyController@create')->name('admin.get.create.vocabulary');
+                Route::post('/create', 'AdminVocabularyController@store');
+
+                Route::get('/update/{id}', 'AdminVocabularyController@edit')->name('admin.get.edit.vocabulary');
+                Route::post('/update/{id}', 'AdminVocabularyController@update');
+
+                Route::get('/{action}/{id}', 'AdminVocabularyController@action')->name('admin.get.action.vocabulary');
+            }
+        );
     }
 );

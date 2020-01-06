@@ -31,4 +31,9 @@ class SubCategories extends Model
     {
         return $this->belongsTo(Categories::class, 'cate_id');
     }
+
+    public function vocabularies()
+    {
+        return $this->hasMany('vocabularies');
+    }
 }

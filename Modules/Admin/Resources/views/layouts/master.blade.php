@@ -7,6 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="../../favicon.ico">
 
     <title>Admin System</title>
@@ -67,6 +68,7 @@
                 </li>
                 <li class="{{ \Request::route()->getName() == 'admin.get.list.category' ? 'active' : '' }}"><a href="{{ route('admin.get.list.category') }}">Danh Muc</a></li>
                 <li class="{{ \Request::route()->getName() == 'admin.get.list.sub_category' ? 'active' : '' }}"><a href="{{ route('admin.get.list.sub_category') }}">Danh Muc Con</a></li>
+                <li class="{{ \Request::route()->getName() == 'admin.get.list.vocabulary' ? 'active' : '' }}"><a href="{{ route('admin.get.list.vocabulary') }}">Tu Vung</a></li>
                 <li class="{{ \Request::route()->getName() == 'admin.get.list.user' ? 'active' : '' }}"><a href="{{ route('admin.get.list.user') }}">Thanh Vien</a></li>
                 <li class="{{ \Request::route()->getName() == 'admin.get.list.contact' ? 'active' : '' }}"><a href="{{ route('admin.get.list.contact') }}">Lien He</a></li>
             </ul>

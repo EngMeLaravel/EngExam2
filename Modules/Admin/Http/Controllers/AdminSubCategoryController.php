@@ -11,18 +11,6 @@ use Illuminate\Routing\Controller;
 
 class AdminSubCategoryController extends Controller
 {
-    public function create()
-    {
-        $categories = $this->getCategories();
-        return view('admin::sub_category.create', compact('categories'));
-    }
-
-    public function store(RequestSubCategory $requestSubCategory)
-    {
-        $this->insertOrUpdate($requestSubCategory);
-        return redirect()->back();
-    }
-
     /**
      * Display a listing of the resource.
      * @return Response
@@ -32,7 +20,7 @@ class AdminSubCategoryController extends Controller
         $sub_categories = SubCategories::with('categories:id,cate_name');
 
         if ($request->name) {
-            $sub_categories->where('cate_name', 'like', '%'.$request->name.'%');
+            $sub_categories->where('subcate_name', 'like', '%'.$request->name.'%');
         }
 
         if ($request->cate) {
@@ -48,6 +36,18 @@ class AdminSubCategoryController extends Controller
             'categories' => $categories,
         ];
         return view('admin::sub_category.index', $viewData);
+    }
+
+    public function create()
+    {
+        $categories = $this->getCategories();
+        return view('admin::sub_category.create', compact('categories'));
+    }
+
+    public function store(RequestSubCategory $requestSubCategory)
+    {
+        $this->insertOrUpdate($requestSubCategory);
+        return redirect()->back();
     }
 
     public function edit($id)

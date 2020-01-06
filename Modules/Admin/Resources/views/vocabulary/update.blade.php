@@ -3,11 +3,11 @@
 <div class="page-header">
     <ol class="breadcrumb">
     <li><a href="{{ route('admin.home') }}">Trang chủ</a></li>
-    <li><a href="{{ route('admin.get.list.product') }}" title="sản phẩm">Sản Phẩm</a></li>
+    <li><a href="{{ route('admin.get.list.sub_category') }}" title="danh mục">Danh mục con</a></li>
         <li class="active">Cập nhật</li>
     </ol>
 </div>
 <div class="">
-    @include('admin::product.form')
+    @include('admin::sub_category.form')
 </div>
 @endsection
