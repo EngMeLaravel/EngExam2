@@ -76,7 +76,7 @@
             <div class="pronounce">
                 <p><span class="accent_us">US </span>/ɪnˈθu·ziˌæz·əm/</p>
                 <p><span class="accent_uk">UK </span>/ɪnˈθjuː.zi.æz.əm/</p>
-            </div>
+            </div>s
         </div>
         <div class="like w_mean">
             <h5>Meaning : </h5>

@@ -25,20 +25,13 @@
     <div class="mot_tu">
         <div class="list-group">
             <a href="#" class="list-group-item">
-                <h4 class="list-group-item-heading">First <span>['adj'] <span class="accent_us">US</span>/fɜːrst/ <span class="accent_uk">UK</span>/fɜːst/ : Đầu tiên, thứ nhất, đầu tiên</span> </h4>
-                <p class="list-group-item-text">It was the first time they had ever met.</p>
-            </a>
-            <a href="#" class="list-group-item">
-                <h4 class="list-group-item-heading">First <span>['adj'] <span class="accent_us">US</span>/fɜːrst/ <span class="accent_uk">UK</span>/fɜːst/ : Đầu tiên, thứ nhất, đầu tiên</span> </h4>
-                <p class="list-group-item-text">It was the first time they had ever met.</p>
-            </a>
-            <a href="#" class="list-group-item">
-                <h4 class="list-group-item-heading">First <span>['adj'] <span class="accent_us">US</span>/fɜːrst/ <span class="accent_uk">UK</span>/fɜːst/ : Đầu tiên, thứ nhất, đầu tiên</span> </h4>
-                <p class="list-group-item-text">It was the first time they had ever met.</p>
-            </a>
-            <a href="#" class="list-group-item">
-                <h4 class="list-group-item-heading">First <span>['adj'] <span class="accent_us">US</span>/fɜːrst/ <span class="accent_uk">UK</span>/fɜːst/ : Đầu tiên, thứ nhất, đầu tiên</span> </h4>
-                <p class="list-group-item-text">It was the first time they had ever met.</p>
+{{--                <div>--}}
+{{--                    <h4 class="list-group-item-heading">approach</h4>--}}
+{{--                </div>--}}
+                <div>
+                    <h4 class="list-group-item-heading">First <span>['adj'] <span class="accent_us">US</span>/fɜːrst/ <span class="accent_uk">UK</span>/fɜːst/ : Đầu tiên, thứ nhất, đầu tiên</span> </h4>
+                    <p class="list-group-item-text">It was the first time they had ever met.</p>
+                </div>
             </a>
         </div>
     </div>

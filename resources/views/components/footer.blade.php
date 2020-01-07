@@ -103,7 +103,7 @@
                                 <p>+84 944513 107</p>
                             </div>
                         </div>
-                    </div>
+                  Details vocabulary  </div>
                     <div class="col-md-3 col-sm-4">
                         <div class="info-fcontainer">
                             <div class="infof-icon">
@@ -139,7 +139,7 @@
                     </div>
                     <div class="col-md-6 col-xs-12">
                         <div class="footer-payment pull-right">
-                            <a href="#"><img src="{{ asset('img/payment.png') }}" alt="" /></a>
+{{--                            <a href="#"><img src="{{ asset('img/payment.png') }}" alt="" /></a>--}}
                         </div>
                     </div>
                 </div>
