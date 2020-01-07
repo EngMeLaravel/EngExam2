@@ -16,8 +16,9 @@ class MyLibrary extends Controller
     }
 
     public function show($id){
+        $my_category = myCategories::where('user_id',get_data_user('web'))->get();
         $mysubcategory = mySubCategories::all()->where('my_category_id',$id);
-        return redirect()->route('get.my_lib.index')->with( ['mysubcategory' => $mysubcategory] );
+        return view('my_library.index', compact('mysubcategory','my_category'));
     }
 
     public function add(Request $request){
@@ -48,15 +49,27 @@ class MyLibrary extends Controller
         $my_category  = myCategories::find($my_cate_id);
         $my_category->my_cate_name = $my_cate_name;
         $my_category->my_cate_slug = str_slug($my_cate_name);
+
+        if ($request->hasFile('my_cate_avatar')) {
+
+            $file = upload_image('my_cate_avatar');
+
+            if (isset($file['name'])) {
+                $my_category->my_cate_avatar = $file['name'];
+            }
+
+        }
+
         $my_category->save();
         return redirect()->back();
     }
 
-    // xóa ngành cha thì ngành con chưa xóa được
     public function delete(Request $request){
         $my_cate_id  = $request->my_cate_id;
         $my_category = myCategories::find($my_cate_id);
+
         $my_category->delete($my_cate_id);
+
         return redirect()->back();
     }
 
@@ -80,6 +93,32 @@ class MyLibrary extends Controller
 
         $my_sub_category->save();
 
+        return redirect()->back();
+    }
+
+    public function savesubcate(Request $request){
+        $my_subcate_id   =  $request->my_subcate_id;
+        $my_subcate_name = $request->my_subcate_name;
+        $my_subcategory  = mySubCategories::find($my_subcate_id);
+        $my_subcategory->my_subcate_name = $my_subcate_name;
+        $my_subcategory->my_subcate_slug = str_slug($my_subcate_name);
+        if ($request->hasFile('my_subcate_avatar')) {
+
+            $file = upload_image('my_subcate_avatar');
+
+            if (isset($file['name'])) {
+                $my_subcategory->my_subcate_avatar = $file['name'];
+            }
+
+        }
+        $my_subcategory->save();
+        return redirect()->back();
+    }
+
+    public function deletesubcate(Request $request){
+        $my_subcate_id  = $request->my_subcate_id;
+        $my_subcategory = mySubCategories::find($my_subcate_id);
+        $my_subcategory->delete($my_subcate_id);
         return redirect()->back();
     }
 }
