@@ -70,7 +70,7 @@ class MyLibrary extends Controller
 
         $my_category->delete($my_cate_id);
 
-        return redirect()->back();
+        return redirect()->route('get.my_lib.index');
     }
 
 

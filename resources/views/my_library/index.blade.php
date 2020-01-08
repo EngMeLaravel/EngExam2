@@ -126,7 +126,8 @@
                                 <a id="delete_category" data-toggle="modal" data-target="#deletecategory"
                                    data-id="{{ $my_category_item->id }}" class="dropdown-item" href="#">Xóa</a>
                                 <a id="add_sub_category" data-toggle="modal" data-target="#addsubcategory"
-                                   data-id="{{ $my_category_item->id }}" class="dropdown-item" href="#">Thêm ngành
+                                   data-id="{{ $my_category_item->id }}"
+                                   data-name="{{ $my_category_item->my_cate_name }}" class="dropdown-item" href="#">Thêm ngành
                                     con</a>
                             </div>
                         </div>
@@ -210,9 +211,7 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <img
-                                src="{{isset($my_category->my_cate_avatar) ? pare_url_file($my_category->my_cate_avatar) : asset('img/no-image-available-grid.jpg')}}"
-                                id="output_img" alt="" style="width: 500px;">
+                            <img src="{{asset('img/no-image-available-grid.jpg')}}" id="output_img" alt="" style="width: 500px;">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -248,7 +247,7 @@
                         <div class="form-group">
                             <label for="input_img">Avatar:</label>
                             <input type="file" name="my_cate_avatar" class="form-control"
-                                   value="">
+                                   value="" id="input_img2">
                             @if ($errors->has('my_cate_avatar'))
                                 <span class="error-text">
                                     {{$errors->first('my_cate_avatar')}}
@@ -256,7 +255,7 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <img src="" id="my_cate_avatar" alt="" style="width: 500px;">
+                            <img src="" id="my_cate_avatar" class="output_img2" alt="" style="width: 500px;">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -314,7 +313,7 @@
                         </div>
                         <div class="form-group">
                             <label for="input_img">Avatar:</label>
-                            <input type="file" name="my_subcate_avatar" class="form-control"
+                            <input type="file" name="my_subcate_avatar" id="input_img1" class="form-control"
                                    value="{{old('my_subcate_avatar',isset($my_category->my_subcate_avatar) ? $my_category->my_subcate_avatar : '')}}">
                             @if ($errors->has('my_subcate_avatar'))
                                 <span class="error-text">
@@ -323,9 +322,11 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <img
-                                src="{{isset($my_category->my_sub_cate_avatar) ? pare_url_file($my_category->my_sub_cate_avatar) : asset('img/no-image-available-grid.jpg')}}"
-                                id="output_img" alt="" style="width: 500px;">
+                            <img src="{{asset('img/no-image-available-grid.jpg')}}" id="output_img1" alt="" style="width: 500px;">
+                        </div>
+                        <div class="form-group">
+                            <b>Nhóm Cha: </b>
+                            <select id="select_category_default"></select>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -361,7 +362,7 @@
                         </div>
                         <div class="form-group">
                             <label for="input_img">Avatar:</label>
-                            <input type="file" name="my_subcate_avatar" class="form-control"
+                            <input type="file" name="my_subcate_avatar" id="input_img3" class="form-control"
                                    value="">
                             @if ($errors->has('my_subcate_avatar'))
                                 <span class="error-text">
@@ -370,7 +371,7 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <img src="" id="my_subcate_avatar" alt="" style="width: 500px;">
+                            <img src="" id="my_subcate_avatar" class="output_img3" alt="" style="width: 500px;">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -461,8 +462,10 @@
     <script>
         $(document).on("click", "#add_sub_category", function () {
             var my_cate_id = $(this).data('id');
+            var my_cate_name = $(this).data('name');
             $(".modal-body #my_cate_id_add").val(my_cate_id);
-            console.log(my_cate_id);
+            var option = '<option>'+my_cate_name+'</option>';
+            document.getElementById('select_category_default').innerHTML += option;
             // As pointed out in comments,
             // it is unnecessary to have to manually call the modal.
             // $('#addBookDialog').modal('show');
@@ -526,6 +529,72 @@
         });
         $(document).on('contextmenu', function (e) {
             $(".dropdown-menu").removeClass("show").hide();
+        });
+    </script>
+
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#output_img').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#input_img").change(function() {
+            readURL(this);
+        });
+
+        function readURL1(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#output_img1').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#input_img1").change(function() {
+            readURL1(this);
+        });
+
+        function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('.output_img2').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#input_img2").change(function() {
+            readURL2(this);
+        });
+
+        function readURL3(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('.output_img3').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#input_img3").change(function() {
+            readURL3(this);
         });
     </script>
 @endsection
