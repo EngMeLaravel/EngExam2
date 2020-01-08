@@ -202,7 +202,7 @@
                                     <li><a href="" title="Quản lý tổng quan">Quản lý</a></li>
                                     <li><a href="wishlist.html">Sản phẩm yêu thích</a></li>
                                     <li><a href="cart.html">Giỏ hàng</a></li>
-                                    <li><a href="">Thoát</a></li>
+                                    <li><a href="{{ route('get.logout.user') }}">Thoát</a></li>
                                 @else
                                     <li><a href="{{ route('get.register') }}">Đăng ký</a></li>
                                     <li><a href="{{ route('get.login') }}">Đăng nhập</a></li>
