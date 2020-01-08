@@ -15,7 +15,9 @@ class CreateTableVocaType extends Migration
     {
         Schema::create('voca_type', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type');
+            $table->string('type_name');
+            $table->string('type_abbre');
+            $table->string('type_vi');
             $table->timestamps();
         });
     }
