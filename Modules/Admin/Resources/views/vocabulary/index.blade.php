@@ -49,10 +49,8 @@
                 <th>Phát âm</th>
                 <th>Loại từ</th>
                 <th>Ảnh</th>
-                <th>Ví dụ Anh</th>
-                <th>Nghĩa của ví dụ Anh</th>
-{{--                <th>Cụm từ liên quan</th>--}}
-{{--                <th>Câu liên quan</th>--}}
+                <th>Ví dụ En</th>
+                <th>Nghĩa VD Vi</th>
                 <th>Ngành cha</th>
                 <th>Ngành con</th>
                 <th>Thao Tác</th>

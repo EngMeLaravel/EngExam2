@@ -20,7 +20,7 @@ class CreateVocabulariesTable extends Migration
             $table->string('voca_author');
             $table->string('voca_mean');
             $table->string('voca_spell');
-            $table->string('voca_type');
+            $table->integer('voca_type')->default(0)->index();
             $table->string('voca_example_en');
             $table->string('voca_example_vi');
             $table->string('voca_image');

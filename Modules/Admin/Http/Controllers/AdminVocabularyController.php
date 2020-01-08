@@ -3,8 +3,10 @@
 namespace Modules\Admin\Http\Controllers;
 
 use App\Categories;
+use App\Http\Requests\RequestVocabulary;
 use App\SubCategories;
 use App\Vocabularies;
+use App\VocaType;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -48,14 +50,21 @@ class AdminVocabularyController extends Controller
 
     public function create()
     {
+        $voca_type =  VocaType::all();
         $categories = $this->getCategories();
         $sub_categories = SubCategories::all();
-        return view('admin::vocabulary.create', compact('categories', 'sub_categories'));
+
+        $viewData = [
+            'categories' => $categories,
+            'sub_categories' => $sub_categories,
+            'voca_type' => $voca_type
+        ];
+        return view('admin::vocabulary.create', $viewData);
     }
 
-    public function store(RequestSubCategory $requestSubCategory)
+    public function store(RequestVocabulary $requestVocabulary)
     {
-        $this->insertOrUpdate($requestSubCategory);
+        $this->insertOrUpdate($requestVocabulary);
         return redirect()->back();
     }
 
@@ -72,9 +81,9 @@ class AdminVocabularyController extends Controller
         return view('admin::sub_category.update', $view);
     }
 
-    public function update(RequestSubCategory $requestSubCategory, $id)
+    public function update(RequestVocabulary $requestVocabulary, $id)
     {
-        $this->insertOrUpdate($requestSubCategory, $id);
+        $this->insertOrUpdate($requestVocabulary, $id);
         return redirect()->back();
     }
 
@@ -88,7 +97,7 @@ class AdminVocabularyController extends Controller
         return SubCategories::where('cate_id', $cate_id)->get();
     }
 
-    public function insertOrUpdate($requestSubCategory, $id = '')
+    public function insertOrUpdate($requestVocabulary, $id = '')
     {
         $vocabulary = new Vocabularies();
 
@@ -96,18 +105,18 @@ class AdminVocabularyController extends Controller
             $vocabulary = Vocabularies::find($id);
         }
 
-        $vocabulary->voca_name         = $requestSubCategory->voca_name;
-        $vocabulary->voca_slug         = str_slug($requestSubCategory->subcate_name);
+        $vocabulary->voca_name         = $requestVocabulary->voca_name;
+        $vocabulary->voca_slug         = str_slug($requestVocabulary->subcate_name);
         $vocabulary->voca_author       = "admin";
-        $vocabulary->voca_mean         = $requestSubCategory->voca_mean;
-        $vocabulary->voca_spell        = $requestSubCategory->voca_spell;
-        $vocabulary->voca_type         = $requestSubCategory->voca_type;
-        $vocabulary->voca_example_en   = $requestSubCategory->voca_example_en;
-        $vocabulary->voca_example_vi   = $requestSubCategory->voca_example_vi;
-        $vocabulary->cate_id           = $requestSubCategory->cate_id;
-        $vocabulary->subcate_id        = $requestSubCategory->subcate_id;
+        $vocabulary->voca_mean         = $requestVocabulary->voca_mean;
+        $vocabulary->voca_spell        = $requestVocabulary->voca_spell;
+        $vocabulary->voca_type         = $requestVocabulary->voca_type;
+        $vocabulary->voca_example_en   = $requestVocabulary->voca_example_en;
+        $vocabulary->voca_example_vi   = $requestVocabulary->voca_example_vi;
+        $vocabulary->cate_id           = $requestVocabulary->cate_id;
+        $vocabulary->subcate_id        = $requestVocabulary->subcate_id;
 
-        if ($requestSubCategory->hasFile('voca_image')) {
+        if ($requestVocabulary->hasFile('voca_image')) {
 
             $file = upload_image('voca_image');
 
@@ -127,10 +136,6 @@ class AdminVocabularyController extends Controller
             switch ($action) {
                 case 'delete':
                     $sub_category->delete();
-                    break;
-                case 'active':
-                    $sub_category->subcate_active = $sub_category->subcate_active ? 0 : 1;
-                    $sub_category->save();
                     break;
                 default:
                     # code...

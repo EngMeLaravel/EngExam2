@@ -21,105 +21,126 @@
 </script>
 <form action="" method="POST" enctype="multipart/form-data">
     @csrf
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="c_name">Từ:</label>
-            <input type="text" class="form-control" id="c_name" placeholder="Tên từ vựng"
-                   value="{{old('voca_name',isset($sub_category->subcate_name) ? $sub_category->subcate_name : '')}}"
-                   name="voca_name">
-            @if ($errors->has('voca_name'))
-                <span class="error-text">
-                {{$errors->first('voca_name')}}
-            </span>
+    <div class="form-group">
+        <label for="c_name">Từ:</label>
+        <input type="text" class="form-control" id="c_name" placeholder="Tên từ vựng"
+               value="{{old('voca_name',isset($vocabulary->voca_name) ? $vocabulary->voca_name : '')}}"
+               name="voca_name">
+        @if ($errors->has('voca_name'))
+            <span class="error-text">
+            {{$errors->first('voca_name')}}
+        </span>
+        @endif
+    </div>
+    <div class="form-group">
+        <label for="c_name">Nghĩa:</label>
+        <input type="text" class="form-control" id="c_name" placeholder="Nghĩa"
+               value="{{old('voca_mean',isset($vocabulary->voca_mean) ? $vocabulary->voca_mean : '')}}"
+               name="voca_mean">
+        @if ($errors->has('voca_mean'))
+            <span class="error-text">
+            {{$errors->first('voca_mean')}}
+        </span>
+        @endif
+    </div>
+    <div class="form-group">
+        <label for="c_name">Phát âm:</label>
+        <input type="text" class="form-control" id="c_name" placeholder="Phát âm"
+               value="{{old('voca_spell',isset($vocabulary->voca_spell) ? $vocabulary->voca_spell : '')}}"
+               name="voca_spell">
+        @if ($errors->has('voca_spell'))
+            <span class="error-text">
+            {{$errors->first('voca_spell')}}
+        </span>
+        @endif
+    </div>
+    <div class="form-group">
+        <label for="c_name">Loại từ vựng:</label>
+        <select name="voca_type" id="category" class="form-control">
+            <option value="">--Loại từ vựng--</option>
+            @if ($voca_type)
+                @foreach ($voca_type as $voca_type_word)
+                    <option value="{{ $voca_type_word->id }}"
+                        {{old('voca_type',isset($voca_type_word->voca_type) ? $voca_type_word->voca_type : '')
+                        == $voca_type_word->id ? "selected='selected'" : ""}}>{{ $voca_type_word->type }}</option>
+                @endforeach
             @endif
-        </div>
-        <div class="form-group">
-            <label for="c_name">Nghĩa:</label>
-            <input type="text" class="form-control" id="c_name" placeholder="Nghĩa"
-                   value="{{old('voca_mean',isset($sub_category->subcate_name) ? $sub_category->subcate_name : '')}}"
-                   name="voca_mean">
-            @if ($errors->has('voca_mean'))
-                <span class="error-text">
-                {{$errors->first('voca_mean')}}
-            </span>
+        </select>
+        @if ($errors->has('voca_type'))
+            <span class="error-text">
+            {{$errors->first('voca_type')}}
+        </span>
+        @endif
+    </div>
+    <div class="form-group">
+        <label for="c_name">Ví dụ Anh:</label>
+        <input type="text" class="form-control" id="c_name" placeholder="Ví dụ Anh"
+               value="{{old('voca_example_en',isset($vocabulary->voca_example_en) ? $vocabulary->voca_example_en : '')}}"
+               name="voca_example_en">
+        @if ($errors->has('voca_example_en'))
+            <span class="error-text">
+            {{$errors->first('voca_example_en')}}
+        </span>
+        @endif
+    </div>
+    <div class="form-group">
+        <label for="c_name">Nghĩa của ví dụ Anh:</label>
+        <input type="text" class="form-control" id="c_name" placeholder="Nghĩa của ví dụ Anh"
+               value="{{old('voca_example_vi',isset($vocabulary->voca_example_vi) ? $vocabulary->voca_example_vi : '')}}"
+               name="voca_example_vi">
+        @if ($errors->has('voca_example_vi'))
+            <span class="error-text">
+            {{$errors->first('voca_example_vi')}}
+        </span>
+        @endif
+    </div>
+    <div class="form-group">
+        <select name="cate_id" id="category" class="form-control">
+            <option value="">--Ngành cha--</option>
+            @if ($categories)
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}"
+                        {{old('cate_id',isset($category->cate_id) ? $category->cate_id : '')
+                        == $category->id ? "selected='selected'" : ""}}>{{ $category->cate_name }}</option>
+                @endforeach
             @endif
-        </div>
-        <div class="form-group">
-            <label for="c_name">Phát âm:</label>
-            <input type="text" class="form-control" id="c_name" placeholder="Phát âm"
-                   value="{{old('voca_spell',isset($sub_category->subcate_name) ? $sub_category->subcate_name : '')}}"
-                   name="voca_spell">
-            @if ($errors->has('voca_spell'))
-                <span class="error-text">
-                {{$errors->first('voca_spell')}}
-            </span>
+        </select>
+        @if ($errors->has('cate_id'))
+            <span class="error-text">
+            {{$errors->first('cate_id')}}
+        </span>
+        @endif
+    </div>
+    <div class="form-group">
+        <select name="subcate_id" id="sub_category" class="form-control">
+            <option value="">--Ngành con--</option>
+            @if ($sub_categories)
+                @foreach ($sub_categories as $sub_category)
+                    <option value="{{ $sub_category->id }}"
+                        {{old('subcate_id',isset($sub_category->subcate_id) ? $sub_category->subcate_id : '')
+                        == $sub_category->id ? "selected='selected'" : ""}}>{{ $sub_category->subcate_name }}</option>
+                @endforeach
             @endif
-        </div>
-        <div class="form-group">
-            <label for="c_name">Loại từ vựng:</label>
-            <select name="voca_type" id="" class="form-control">
-                <option value="n">Danh từ (n)</option>
-                <option value="v">Động từ (v)</option>
-                <option value="adj">Tính từ (adj)</option>
-                <option value="adv">Trạng từ (adv)</option>
-                <option value="Pre">Giới từ (Pre)</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="input_img">Ảnh:</label>
-            <input type="file" name="voca_image" id="input_img" class="form-control"
-                   value="{{old('voca_image',isset($category->cate_avatar) ? $category->cate_avatar : '')}}">
-            @if ($errors->has('voca_image'))
-                <span class="error-text">
+        </select>
+        @if ($errors->has('subcate_id'))
+            <span class="error-text">
+            {{$errors->first('subcate_id')}}
+        </span>
+        @endif
+    </div>
+    <div class="form-group">
+        <label for="input_img">Ảnh:</label>
+        <input type="file" name="voca_image" id="input_img" class="form-control"
+               value="{{old('voca_image',isset($vocabulary->cate_avatar) ? $vocabulary->cate_avatar : '')}}">
+        @if ($errors->has('voca_image'))
+            <span class="error-text">
                 {{$errors->first('voca_image')}}
             </span>
-            @endif
-        </div>
-        <div class="form-group">
-            <label for="c_name">Ví dụ Anh:</label>
-            <input type="text" class="form-control" id="c_name" placeholder="Ví dụ Anh"
-                   value="{{old('voca_example_en',isset($sub_category->subcate_name) ? $sub_category->subcate_name : '')}}"
-                   name="voca_example_en">
-            @if ($errors->has('voca_example_en'))
-                <span class="error-text">
-                {{$errors->first('voca_example_en')}}
-            </span>
-            @endif
-        </div>
-        <div class="form-group">
-            <label for="c_name">Nghĩa của ví dụ Anh:</label>
-            <input type="text" class="form-control" id="c_name" placeholder="Nghĩa của ví dụ Anh"
-                   value="{{old('voca_example_vi',isset($sub_category->subcate_name) ? $sub_category->subcate_name : '')}}"
-                   name="voca_example_vi">
-            @if ($errors->has('voca_example_vi'))
-                <span class="error-text">
-                {{$errors->first('voca_example_vi')}}
-            </span>
-            @endif
-        </div>
-        <div class="form-group">
-            <select name="cate_id" id="category" class="form-control">
-                <option value="">--Ngành cha--</option>
-                @if ($categories)
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}" {{ \Request::get('cate') == $category->id ? "selected='selected'" : '' }} >{{ $category->cate_name }}</option>
-                    @endforeach
-                @endif
-            </select>
-        </div>
-        <div class="form-group">
-            <select name="subcate_id" id="sub_category" class="form-control">
-                <option value="">--Ngành con--</option>
-                @if ($sub_categories)
-                    @foreach ($sub_categories as $sub_category)
-                        <option
-                            value="{{ $sub_category->id }}" {{ \Request::get('subcate') == $sub_category->id ? "selected='selected'" : '' }} >{{ $sub_category->subcate_name }}</option>
-                    @endforeach
-                @endif
-            </select>
-        </div>
+        @endif
     </div>
-    <div class="col-md-6"></div>
+    <div class="form-group">
+        <img src="{{isset($vocabulary->subcate_avatar) ? pare_url_file($vocabulary->subcate_avatar) : asset('img/no-image-available-grid.jpg')}}" id="output_img" alt="" style="width: 500px;">
+    </div>
     <div class="col-xs-12">
         <button type="submit" class="btn btn-success"> Lưu Thông Tin</button>
     </div>
