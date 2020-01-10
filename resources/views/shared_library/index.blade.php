@@ -158,6 +158,14 @@
             </div>
             <div class="col-md-7">
                 <div class="row">
+                    <?php $vocaDoesExist = Illuminate\Support\Facades\Session::get('vocaDoesExist'); $voca_name=Illuminate\Support\Facades\Session::get('voca_name');?>
+                    @if(!empty($vocaDoesExist))
+                        @if($vocaDoesExist == 'false')
+                            <div class="col-md-12">
+                                <h4 class="text-center" style="margin-top: 15px;"><span style="color: red;">"<?php echo $voca_name ?>"</span> hiện chưa có trong cơ sở dữ liệu!</h4>
+                            </div>
+                        @endif
+                    @endif
                     @if(isset($subcategory) && count($subcategory) > 0)
                         @foreach($subcategory as $sub_category_item)
                             <div class="col-md-4" id="mot-khoi">

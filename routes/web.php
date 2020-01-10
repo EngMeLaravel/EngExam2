@@ -54,6 +54,7 @@ Route::prefix('my-library')->middleware('CheckLoginUser')->group(function (){
 
 Route::post('/translate', 'HomeController@ajax_translate');
 Route::post('/search', 'HomeController@ajax_search');
+Route::get('/voca/{voca_name}','HomeController@voca');
 
 Route::get('lien-he', 'ContactController@getContact')->name('get.contact');
 Route::post('lien-he', 'ContactController@saveContact');
