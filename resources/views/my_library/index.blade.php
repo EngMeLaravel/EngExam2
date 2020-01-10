@@ -152,10 +152,6 @@
                                 <a id="delete_subcategory" data-toggle="modal" data-target="#deletesubcategory"
                                    data-id="{{ $my_sub_category_item->id }}" class="dropdown-item"
                                    href="#">Xóa</a>
-                                <a id="add_vocabulary" data-toggle="modal" data-target="#addvocabulary"
-                                   data-id="{{ $my_sub_category_item->id }}" class="dropdown-item" href="#">Thêm
-                                    từ
-                                    vựng</a>
                             </div>
                         </div>
                     @endforeach

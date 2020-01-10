@@ -2,9 +2,32 @@
 @section('add_more_css')
     <link rel="stylesheet" href="{{ asset('css/home.css')  }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script src="{{ asset("js/jquery-3.4.1.min.js") }}"> </script>
+    <script src="{{ asset("js/jquery-3.4.1.min.js") }}"></script>
     <script>
         $(document).ready(function(){
+            $('#textarea_one').filter(function(){
+                var keyword = $(this).val();
+                var voca_single = keyword.split(" ");
+                for (i = 0; i < voca_single.length; i++) {
+                    $('#voca_array' + i).html(voca_single[i]);
+                    document.querySelector("#voca_array" + i).href = "voca/" + voca_single[i];
+                }
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '{{ url('translate') }}',
+                    type: 'post',
+                    data: {keyword: keyword},
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#textarea_two').text(data.text);
+                    }
+                });
+            }).length
+
             $('#textarea_one').keyup(function(event) {
                 var keyword = $(this).val();
                 var voca_single = keyword.split(" ");
@@ -27,6 +50,7 @@
                     }
                 });
             });
+
             $('#textarea_one').keydown(function(event) {
                 var keyword = $(this).val();
                 var voca_single = keyword.split(" ");
@@ -39,6 +63,7 @@
     </script>
 @endsection
 @section('content')
+
     <div class="container">
         <div class="col-md-9">
             <div class="row translate_head">
@@ -77,4 +102,7 @@
             </div>
         </div>
     </div>
+
 @endsection
+
+

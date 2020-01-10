@@ -56,13 +56,13 @@
     </div>
     <div class="form-group">
         <label for="c_name">Loại từ vựng:</label>
-        <select name="voca_type" id="category" class="form-control">
+        <select name="voca_type" class="form-control">
             <option value="">--Loại từ vựng--</option>
             @if ($voca_type)
                 @foreach ($voca_type as $voca_type_word)
                     <option value="{{ $voca_type_word->id }}"
                         {{old('voca_type',isset($voca_type_word->voca_type) ? $voca_type_word->voca_type : '')
-                        == $voca_type_word->id ? "selected='selected'" : ""}}>{{ $voca_type_word->type }}</option>
+                        == $voca_type_word->id ? "selected='selected'" : ""}}>{{ $voca_type_word->type_name }}</option>
                 @endforeach
             @endif
         </select>
@@ -118,7 +118,8 @@
                 @foreach ($sub_categories as $sub_category)
                     <option value="{{ $sub_category->id }}"
                         {{old('subcate_id',isset($sub_category->subcate_id) ? $sub_category->subcate_id : '')
-                        == $sub_category->id ? "selected='selected'" : ""}}>{{ $sub_category->subcate_name }}</option>
+                        == $sub_category->id ? "selected='selected'" : ""}}>{{ $sub_category->subcate_name }}
+                    </option>
                 @endforeach
             @endif
         </select>
