@@ -171,23 +171,28 @@
                             </div>
                         @endforeach
                     @else
-                        @if(isset($subcategory) && count($subcategory) <= 0)
-                            <div class="col-md-12">
-                                <hr>
-                                <h4 id="no_word_found">khong co sub nao trong cate nay</h4>
-                            </div>
-                        @else
-                            @if(isset($vocabularies) && count($vocabularies) > 0)
+                        @if(isset($vocabularies_detail))
                                 <div class="col-md-12">
-                                    @include('vocabulary.list_voca')
+                                    @include('vocabulary.detail_voca')
                                 </div>
                             @else
-                                @if(isset($vocabularies) && count($vocabularies) <=0)
+                            @if(isset($subcategory) && count($subcategory) <= 0)
+                                <div class="col-md-12">
+                                    <hr>
+                                    <h4 id="no_word_found">khong co sub nao trong cate nay</h4>
+                                </div>
+                            @else
+                                @if(isset($vocabularies) && count($vocabularies) > 0)
                                     <div class="col-md-12">
-{{--                                        <hr>--}}
-{{--                                        <h4 id="no_word_found">khong co tu vung nao trong sub cate nay</h4>--}}
                                         @include('vocabulary.list_voca')
                                     </div>
+                                @else
+                                    @if(isset($vocabularies) && count($vocabularies) <=0)
+                                        <div class="col-md-12">
+                                            <hr>
+                                            <h4 id="no_word_found">khong co voca nao trong subcate nay</h4>
+                                        </div>
+                                    @endif
                                 @endif
                             @endif
                         @endif

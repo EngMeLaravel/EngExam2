@@ -15,7 +15,7 @@ class PublicLibrary extends Controller
         return view('shared_library.index',compact('category'));
     }
 
-    public function show($id)
+    public function showSubCategories($id)
     {
         $category = Categories::all();
         $subcategory = SubCategories::all()->where('cate_id',$id);
@@ -35,5 +35,12 @@ class PublicLibrary extends Controller
             'vocabularies' => $vocabularies
         ];
         return view('shared_library.index', $viewData);
+    }
+
+    public function getVocaDetail($cate_id, $subcate_id, $id)
+    {
+        $category = Categories::all();
+        $vocabularies_detail = Vocabularies::where([['cate_id', $cate_id], ['subcate_id', $subcate_id]])->find($id);
+        return view('shared_library.index', compact('vocabularies_detail','category'));
     }
 }
