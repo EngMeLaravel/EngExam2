@@ -100,7 +100,7 @@
             @if ($categories)
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}"
-                        {{old('cate_id',isset($category->cate_id) ? $category->cate_id : '')
+                        {{old('cate_id',isset($vocabulary->cate_id) ? $vocabulary->cate_id : '')
                         == $category->id ? "selected='selected'" : ""}}>{{ $category->cate_name }}</option>
                 @endforeach
             @endif
@@ -114,12 +114,11 @@
     <div class="form-group">
         <select name="subcate_id" id="sub_category" class="form-control">
             <option value="">--Ngành con--</option>
-            @if ($sub_categories)
+            @if (isset($sub_categories))
                 @foreach ($sub_categories as $sub_category)
                     <option value="{{ $sub_category->id }}"
-                        {{old('subcate_id',isset($sub_category->subcate_id) ? $sub_category->subcate_id : '')
-                        == $sub_category->id ? "selected='selected'" : ""}}>{{ $sub_category->subcate_name }}
-                    </option>
+                        {{old('subcate_id',isset($vocabulary->subcate_id) ? $vocabulary->subcate_id : '')
+                        == $sub_category->id ? "selected='selected'" : ""}}>{{ $sub_category->subcate_name }}</option>
                 @endforeach
             @endif
         </select>
@@ -140,7 +139,7 @@
         @endif
     </div>
     <div class="form-group">
-        <img src="{{isset($vocabulary->subcate_avatar) ? pare_url_file($vocabulary->subcate_avatar) : asset('img/no-image-available-grid.jpg')}}" id="output_img" alt="" style="width: 500px;">
+        <img src="{{isset($vocabulary->voca_image) ? pare_url_file($vocabulary->voca_image) : asset('img/no-image-available-grid.jpg')}}" id="output_img" alt="" style="width: 500px;">
     </div>
     <div class="col-xs-12">
         <button type="submit" class="btn btn-success"> Lưu Thông Tin</button>
