@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\myCategories;
 use App\mySubCategories;
 use App\MyVocabularies;
+use App\Vocabularies;
 use Illuminate\Http\Request;
 
 class MyLibrary extends Controller
@@ -120,5 +121,33 @@ class MyLibrary extends Controller
         $my_subcategory = mySubCategories::find($my_subcate_id);
         $my_subcategory->delete($my_subcate_id);
         return redirect()->back();
+    }
+
+    public function addBookmark($id)
+    {
+        $vocabulary = Vocabularies::find($id);
+
+        $my_vocabulary = new MyVocabularies();
+
+        $my_vocabulary->my_voca_name         = $vocabulary->voca_name;
+        $my_vocabulary->my_voca_slug         = str_slug($vocabulary->voca_name);
+        $my_vocabulary->my_voca_mean         = $vocabulary->voca_mean;
+        $my_vocabulary->my_voca_spell        = $vocabulary->voca_spell;
+        $my_vocabulary->my_voca_type         = $vocabulary->voca_type;
+        $my_vocabulary->my_voca_example_en   = $vocabulary->voca_example_en;
+        $my_vocabulary->my_voca_example_vi   = $vocabulary->voca_example_vi;
+        $my_vocabulary->my_voca_image        = $vocabulary->voca_image;
+        $my_vocabulary->voca_id              = $vocabulary->id;
+
+//        $my_vocabulary->my_subcate_id        = ;
+
+//        $my_vocabulary->save();
+
+//        $my_vocabulary->my_cate_id           = ;
+//        $my_vocabulary->my_subcate_id        = ;
+
+//        $my_vocabulary->save();
+
+        return view('my_library.index');
     }
 }

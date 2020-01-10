@@ -40,7 +40,6 @@
     </script>
 @endsection
 @section('content')
-
     <div class="container">
         <div class="col-md-9">
             <div class="row translate_head">

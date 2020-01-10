@@ -49,6 +49,9 @@ Route::prefix('my-library')->middleware('CheckLoginUser')->group(function (){
     Route::post('/add-sub-cate-category','MyLibrary@addsubcate')->name('addsubcate.my_lib.index');
     Route::post('/edit-sub-cate-category','MyLibrary@savesubcate')->name('savesubcate.my_lib.index');
     Route::post('/delete-sub-cate-category','MyLibrary@deletesubcate')->name('deletesubcate.my_lib.index');
+
+    Route::get('/add-to-bookmark/{id}','MyLibrary@addBookmark')->name('add_bookmark.my_lib.index');
+
 });
 
 
