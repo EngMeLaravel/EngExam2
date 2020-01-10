@@ -31,7 +31,6 @@ class RequestVocabulary extends FormRequest
             'voca_example_en' => 'required',
             'voca_example_vi' => 'required',
             'cate_id' => 'required',
-            'subcate_id' => 'required',
         ];
     }
 
@@ -45,7 +44,6 @@ class RequestVocabulary extends FormRequest
             'voca_example_en.required' => 'Trường này không được để trống',
             'voca_example_vi.required' => 'Trường này không được để trống',
             'cate_id.required' => 'Trường này không được để trống',
-            'subcate_id.required' => 'Trường này không được để trống',
         ];
     }
 }

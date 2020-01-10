@@ -119,7 +119,9 @@ class AdminVocabularyController extends Controller
         $vocabulary->voca_example_en   = $requestVocabulary->voca_example_en;
         $vocabulary->voca_example_vi   = $requestVocabulary->voca_example_vi;
         $vocabulary->cate_id           = $requestVocabulary->cate_id;
-        $vocabulary->subcate_id        = $requestVocabulary->subcate_id;
+        if($requestVocabulary->subcate_id){
+            $vocabulary->subcate_id    = $requestVocabulary->subcate_id;
+        }
 
         if ($requestVocabulary->hasFile('voca_image')) {
 

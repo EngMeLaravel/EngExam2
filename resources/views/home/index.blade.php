@@ -5,29 +5,6 @@
     <script src="{{ asset("js/jquery-3.4.1.min.js") }}"></script>
     <script>
         $(document).ready(function(){
-            $('#textarea_one').filter(function(){
-                var keyword = $(this).val();
-                var voca_single = keyword.split(" ");
-                for (i = 0; i < voca_single.length; i++) {
-                    $('#voca_array' + i).html(voca_single[i]);
-                    document.querySelector("#voca_array" + i).href = "voca/" + voca_single[i];
-                }
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    url: '{{ url('translate') }}',
-                    type: 'post',
-                    data: {keyword: keyword},
-                    dataType: 'json',
-                    success: function (data) {
-                        $('#textarea_two').text(data.text);
-                    }
-                });
-            }).length
-
             $('#textarea_one').keyup(function(event) {
                 var keyword = $(this).val();
                 var voca_single = keyword.split(" ");

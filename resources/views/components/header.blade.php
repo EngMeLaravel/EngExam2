@@ -1,3 +1,56 @@
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script src="{{ asset("js/jquery-3.4.1.min.js") }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#search_input').keyup(function(event) {
+            var keyword = $(this).val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: '{{ url('search') }}',
+                type: 'post',
+                data: {keyword: keyword},
+                success: function(data){
+                    $('#ul_search_content').html(data);
+                }
+            });
+        });
+    });
+</script>
+<style>
+    .search_content ul li a{
+        color: white;
+        font-size: 16px!important;
+    }
+    .search_content ul{
+        padding-left: 20px;
+        line-height: 30px;
+    }
+    .search_content li{
+        border-bottom: 1px solid white;
+    }
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: white;
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: white;
+    }
+
+    ::-ms-input-placeholder { /* Microsoft Edge */
+        color: white;
+    }
+    #search_input{
+        font-size: 18px;
+    }
+    input::-webkit-input-placeholder {
+        font-size: 18px;
+        line-height: 3;
+    }
+</style>
 <header class="short-stor">
     <div class="container-fluid">
         <div class="row">
@@ -183,12 +236,19 @@
                                 <div class="container nopadding-right">
                                     <form action="" id="searchform" method="get">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="k" maxlength="128" placeholder="Search product...">
+                                            <input id="search_input" type="text" class="form-control" name="k" maxlength="128" placeholder="Search English...">
                                             <span class="input-group-btn">
                                                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                                             </span>
                                         </div>
                                     </form>
+                                </div>
+                                <div class="container">
+                                    <div class="search_content">
+                                        <ul id="ul_search_content">
+
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
