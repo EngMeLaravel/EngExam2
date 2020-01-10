@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class VocaType extends Model
 {
+    protected $table = 'voca_type';
+    protected $guarded = ['*'];
 
 }

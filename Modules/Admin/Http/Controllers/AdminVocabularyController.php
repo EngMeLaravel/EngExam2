@@ -19,7 +19,7 @@ class AdminVocabularyController extends Controller
      */
     public function index(Request $request)
     {
-        $vocabularies = Vocabularies::with('categories:id,cate_name')->with('subCategories:id,subcate_name,cate_id');
+        $vocabularies = Vocabularies::with('categories:id,cate_name')->with('subcategories:id,subcate_name,cate_id')->with('vocatype:id,type_name,type_vi');
 
         if ($request->name) {
             $vocabularies->where('voca_name', 'like', '%'.$request->name.'%');
@@ -39,9 +39,12 @@ class AdminVocabularyController extends Controller
 
         $sub_categories = $this->getSubCategories($request->input('cate'));
 
+        $voca_type =  VocaType::all();
+
         $viewData  = [
             'vocabularies' => $vocabularies,
             'categories' => $categories,
+            'voca_type' => $voca_type,
             'sub_categories' => $sub_categories
         ];
 
@@ -70,15 +73,17 @@ class AdminVocabularyController extends Controller
 
     public function edit($id)
     {
+        $voca_type =  VocaType::all();
         $sub_category = SubCategories::find($id);
         $categories = $this->getCategories();
 
         $view = [
+            'voca_type' => $voca_type,
             'sub_category' => $sub_category,
             'categories' => $categories
         ];
 
-        return view('admin::sub_category.update', $view);
+        return view('admin::vocabulary.update', $view);
     }
 
     public function update(RequestVocabulary $requestVocabulary, $id)
@@ -106,7 +111,7 @@ class AdminVocabularyController extends Controller
         }
 
         $vocabulary->voca_name         = $requestVocabulary->voca_name;
-        $vocabulary->voca_slug         = str_slug($requestVocabulary->subcate_name);
+        $vocabulary->voca_slug         = str_slug($requestVocabulary->voca_name);
         $vocabulary->voca_author       = "admin";
         $vocabulary->voca_mean         = $requestVocabulary->voca_mean;
         $vocabulary->voca_spell        = $requestVocabulary->voca_spell;
@@ -154,7 +159,7 @@ class AdminVocabularyController extends Controller
             $subcategory = SubCategories::all()->where('cate_id',$cate_id);
 
             foreach ($subcategory as $value){
-                $data .= "<option value=$cate_id>$value->subcate_name</option>";
+                $data .= "<option value=$value->id>$value->subcate_name</option>";
             }
             $datas = "<option value=\"\">--Ngành con--</option>".$data;
             echo $datas;

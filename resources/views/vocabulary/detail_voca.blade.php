@@ -69,18 +69,17 @@
 <div id="voca">
     <div class="mot_tu">
         <div class="word">
-            <h3>enthusiasm</h3>
-            <span class="w_type"> noun </span>
+            <h3>{{ $vocabularies_detail->voca_name }}</h3>
+            <span class="w_type"> {{ isset($vocabularies_detail->vocatype->type_name) ? $vocabularies_detail->vocatype->type_name : '[N\A]' }} </span>
         </div>
         <div class="type_and_pronounce">
             <div class="pronounce">
-                <p><span class="accent_us">US </span>/ɪnˈθu·ziˌæz·əm/</p>
-                <p><span class="accent_uk">UK </span>/ɪnˈθjuː.zi.æz.əm/</p>
-            </div>s
+                <p>/{{ $vocabularies_detail->voca_spell }}/</p>
+            </div>
         </div>
         <div class="like w_mean">
             <h5>Meaning : </h5>
-            <span> Sự hăng hái, sự nhiệt tình</span>
+            <span> {{ $vocabularies_detail->voca_mean }}</span>
             <hr>
         </div>
         <div class="like">
@@ -91,20 +90,19 @@
         </div>
         <div class="like">
             <h5>sentence : </h5>
-            <span class="en">One of the good things about teaching young children is their enthusiasm.</span>
-            <span class="vi"> ( -- Một trong những điều tốt về việc dạy trẻ nhỏ là sự nhiệt tình của chúng. -- )</span>
+            <span class="en">{{ $vocabularies_detail->voca_example_en }}</span>
+            <span class="vi"> ( -- {{ $vocabularies_detail->voca_example_vi }} -- )</span>
             <hr>
         </div>
         <div class="like illustration">
             <h5>illustration :</h5>
             <div>
-                <h6>Video:</h6>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/ZAuwjUsiG1Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <h6>Image:</h6>
+                <img src="{{ pare_url_file($vocabularies_detail->voca_image) }}" alt="">
             </div>
             <div>
-                <h6>Image:</h6>
-                <img src="{{ asset('img/others/index.jpeg') }}" alt="">
-                <img src="{{ asset('img/others/giphy.webp') }}" alt="">
+                <h6>Video:</h6>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/ZAuwjUsiG1Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </div>

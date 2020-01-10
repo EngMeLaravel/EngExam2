@@ -14,8 +14,13 @@ class Vocabularies extends Model
         return $this->belongsTo(Categories::class, 'cate_id');
     }
 
-    public function subCategories()
+    public function subcategories()
     {
         return $this->belongsTo(SubCategories::class, 'subcate_id');
+    }
+
+    public function vocatype()
+    {
+        return $this->hasOne(VocaType::class, 'id', 'voca_type');
     }
 }

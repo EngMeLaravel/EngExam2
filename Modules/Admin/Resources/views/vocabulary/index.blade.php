@@ -1,5 +1,26 @@
 @extends('admin::layouts.master')
 @section('content')
+    <script src="{{ asset("js/jquery-3.4.1.min.js") }}"></script>
+    <script>
+        $(document).ready(function () {
+            $("#category").change(function(){
+                var cate_id = $(this).val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '{{ route('admin.ajax_select_sub_cate.vocabulary') }}',
+                    type: 'post',
+                    data: {cate_id: cate_id},
+                    success: function (data) {
+                        $('#sub_category').html(data);
+                    }
+                });
+            });
+        });
+    </script>
     <div class="page-header">
         <ol class="breadcrumb">
             <li><a href="{{ route('admin.home') }}">Trang chủ</a></li>
@@ -14,7 +35,7 @@
                     <input type="text" class="form-control" name="name" placeholder="Tên từ vựng" value="{{ \Request::get('name') }}">
                 </div>
                 <div class="form-group">
-                    <select name="cate" id="" class="form-control">
+                    <select name="cate" id="category" class="form-control">
                         <option value="">--Ngành cha--</option>
                         @if ($categories)
                             @foreach ($categories as $category)
@@ -24,7 +45,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <select name="subcate" id="" class="form-control">
+                    <select name="subcate" id="sub_category" class="form-control">
                         <option value="">--Ngành con--</option>
                         @if ($sub_categories)
                             @foreach ($sub_categories as $sub_category)
@@ -61,16 +82,20 @@
                     @foreach ($vocabularies as $vocabulary)
                         <tr>
                             <td>{{ $vocabulary->id }}</td>
-                            <td>{{ $vocabulary->cate_name }}</td>
+                            <td>{{ $vocabulary->voca_name }}</td>
+                            <td>{{ $vocabulary->voca_mean }}</td>
+                            <td>{{ $vocabulary->voca_spell }}</td>
+                            <td>{{ isset($vocabulary->vocatype->type_vi) ? $vocabulary->vocatype->type_vi : '[N\A]' }}</td>
                             <td>
-                                <img src="{{ pare_url_file($vocabulary->cate_avatar) }}" alt="" class="img img-responsive" style="width: 120px;">
+                                <img src="{{ pare_url_file($vocabulary->voca_image) }}" alt="" class="img img-responsive" style="width: 120px;">
                             </td>
+                            <td>{{ $vocabulary->voca_example_en }}</td>
+                            <td>{{ $vocabulary->voca_example_vi }}</td>
+                            <td>{{ isset($vocabulary->categories->cate_name) ? $vocabulary->categories->cate_name : '[N\A]' }}</td>
+                            <td>{{ isset($vocabulary->subcategories->subcate_name) ? $vocabulary->subcategories->subcate_name : '[N\A]' }}</td>
                             <td>
-                                <a href="{{ route('admin.get.action.category',['active',$vocabulary->id]) }}" class="label {{ $vocabulary->getStatus($vocabulary->c_active)['class'] }}">{{ $vocabulary->getStatus($vocabulary->c_active)['name'] }}</a>
-                            </td>
-                            <td>
-                                <a style="padding: 5px 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 12px;" href="{{ route('admin.get.edit.category',$vocabulary->id) }}"><i class="fas fa-edit"></i> Cập nhật</a>
-                                <a style="padding: 5px 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 12px;" href="{{ route('admin.get.action.category',['delete', $vocabulary->id]) }}"><i class="fas fa-trash"></i> Xóa</a>
+                                <a style="padding: 5px 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 12px;" href="{{ route('admin.get.edit.vocabulary',$vocabulary->id) }}"><i class="fas fa-edit"></i> Cập nhật</a>
+                                <a style="padding: 5px 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 12px;" href="{{ route('admin.get.action.vocabulary',['delete', $vocabulary->id]) }}"><i class="fas fa-trash"></i> Xóa</a>
                             </td>
                         </tr>
                     @endforeach

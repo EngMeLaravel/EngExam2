@@ -23,16 +23,17 @@
 </style>
 <div id="voca">
     <div class="mot_tu">
+        @if(isset($vocabularies))
+        @foreach($vocabularies as $vocabulary)
         <div class="list-group">
-            <a href="#" class="list-group-item">
-{{--                <div>--}}
-{{--                    <h4 class="list-group-item-heading">approach</h4>--}}
-{{--                </div>--}}
+            <a href="{{ route('get_detail_voca.public_lib.index', [$vocabulary->cate_id,$vocabulary->subcate_id,$vocabulary->id]) }}" class="list-group-item">
                 <div>
-                    <h4 class="list-group-item-heading">First <span>['adj'] <span class="accent_us">US</span>/fɜːrst/ <span class="accent_uk">UK</span>/fɜːst/ : Đầu tiên, thứ nhất, đầu tiên</span> </h4>
-                    <p class="list-group-item-text">It was the first time they had ever met.</p>
+                    <h4 class="list-group-item-heading">{{ $vocabulary->voca_name }} <span class="text-danger">['{{ isset($vocabulary->vocatype->type_name) ? $vocabulary->vocatype->type_name : '[N\A]' }}']</span><span> /{{ $vocabulary->voca_spell }}/  : {{ $vocabulary->voca_mean }}</span> </h4>
+                    <p class="list-group-item-text">{{ $vocabulary->voca_example_en }}</p>
                 </div>
             </a>
         </div>
+        @endforeach
+        @endif
     </div>
 </div>
