@@ -29,7 +29,7 @@
             @if (isset($categories))
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}"
-                        {{old('cate_id',isset($category->cate_id) ? $category->cate_id : '')
+                        {{old('cate_id',isset($sub_category->cate_id) ? $sub_category->cate_id : '')
                         == $category->id ? "selected='selected'" : ""}}>{{ $category->cate_name }}</option>
                 @endforeach
             @endif

@@ -74,13 +74,15 @@ class AdminVocabularyController extends Controller
     public function edit($id)
     {
         $voca_type =  VocaType::all();
-        $sub_category = SubCategories::find($id);
+        $vocabulary = Vocabularies::find($id);
+        $sub_category = SubCategories::all();
         $categories = $this->getCategories();
 
         $view = [
             'voca_type' => $voca_type,
             'sub_category' => $sub_category,
-            'categories' => $categories
+            'categories' => $categories,
+            'vocabulary' => $vocabulary,
         ];
 
         return view('admin::vocabulary.update', $view);
