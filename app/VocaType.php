@@ -8,5 +8,4 @@ class VocaType extends Model
 {
     protected $table = 'voca_type';
     protected $guarded = ['*'];
-
 }

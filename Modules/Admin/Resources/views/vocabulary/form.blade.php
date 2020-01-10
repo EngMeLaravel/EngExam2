@@ -117,8 +117,14 @@
             @if (isset($sub_categories))
                 @foreach ($sub_categories as $sub_category)
                     <option value="{{ $sub_category->id }}"
+<<<<<<< HEAD
                         {{old('subcate_id',isset($vocabulary->subcate_id) ? $vocabulary->subcate_id : '')
                         == $sub_category->id ? "selected='selected'" : ""}}>{{ $sub_category->subcate_name }}</option>
+=======
+                        {{old('subcate_id',isset($sub_category->subcate_id) ? $sub_category->subcate_id : '')
+                        == $sub_category->id ? "selected='selected'" : ""}}>{{ $sub_category->subcate_name }}
+                    </option>
+>>>>>>> 03607638b8c0dc69fc56b9944ef9c478ec2aad1c
                 @endforeach
             @endif
         </select>
