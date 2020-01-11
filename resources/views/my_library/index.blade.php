@@ -141,8 +141,7 @@
                     @foreach($mysubcategory as $my_sub_category_item)
                         <div class="nganh-con"
                              style="background-image: url({{ pare_url_file($my_sub_category_item->my_subcate_avatar) }});">
-                            <a class="name_subcate"
-                               href="{{ route("show_mysubcategory.my_lib.index",$my_sub_category_item->id) }}">{{ $my_sub_category_item->my_subcate_name  }}</a>
+                            <a class="name_subcate" href="{{ route('get_vocabularies.my_lib.index',[$my_sub_category_item->my_category_id, $my_sub_category_item->id]) }}">{{ $my_sub_category_item->my_subcate_name  }}</a>
                             <div class="dropdown-menu dropdown-menu-sm" id="context-menu1" style="">
                                 <a id="edit_subcategory" data-toggle="modal" data-target="#editsubcategory"
                                    data-id="{{ $my_sub_category_item->id }}"
@@ -156,7 +155,32 @@
                         </div>
                     @endforeach
                 @else
-                    ĐÂY LÀ PHẦN GIỚI THIỆU LÚC MỚI VÔ TRANG
+{{--                    ĐÂY LÀ PHẦN GIỚI THIỆU LÚC MỚI VÔ TRANG--}}
+                    @if(isset($myvocabularies_detailss))
+                        <div class="col-md-12">
+                            @include('vocabulary.detail_voca')
+                        </div>
+                    @else
+                        @if(isset($mysubcategory) && count($mysubcategory) <= 0)
+                            <div class="col-md-12">
+                                <hr>
+                                <h4 id="no_word_found">Không có sub nào trong cate này</h4>
+                            </div>
+                        @else
+                            @if(isset($myvocabularies) && count($myvocabularies) > 0)
+                                <div class="col-md-12">
+                                    @include('vocabulary.list_voca')
+                                </div>
+                            @else
+                                @if(isset($myvocabularies) && count($myvocabularies) <=0)
+                                    <div class="col-md-12">
+                                        <hr>
+                                        <h4 id="no_word_found">Không có voca nào trong cate này</h4>
+                                    </div>
+                                @endif
+                            @endif
+                        @endif
+                    @endif
                 @endif
             </div>
             <div class="col-md-3">

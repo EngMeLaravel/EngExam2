@@ -51,6 +51,15 @@ Route::prefix('my-library')->middleware('CheckLoginUser')->group(function (){
     Route::post('/delete-sub-cate-category','MyLibrary@deletesubcate')->name('deletesubcate.my_lib.index');
 
     Route::get('/add-to-bookmark/{id}','MyLibrary@addBookmark')->name('add_bookmark.my_lib.index');
+    Route::post('/save-to-bookmark','MyLibrary@saveBookmark')->name('save_bookmark.my_lib.index');
+
+    Route::get('/{mycate_id}-{mysubcate_id}-{word_id}','MyLibrary@getVocaDetail')->name('get_detail_voca.my_lib.index');
+    Route::get('/{mycate_id}-{mysubcate_id}','MyLibrary@getVocabularies')->name('get_vocabularies.my_lib.index');
+    Route::get('/delete-voca/{voca_id}','MyLibrary@deleteVoca')->name('delete_voca.my_lib.index');
+
+    Route::get('/edit-voca/{voca_id}','MyLibrary@editVoca')->name('get.edit.vocabulary');
+    Route::post('/edit-voca/{voca_id}','MyLibrary@updateVoca');
+
 
 });
 
@@ -58,6 +67,7 @@ Route::prefix('my-library')->middleware('CheckLoginUser')->group(function (){
 Route::post('/translate', 'HomeController@ajax_translate');
 Route::post('/search', 'HomeController@ajax_search');
 Route::get('/voca/{voca_name}','HomeController@voca');
+Route::post('/ajax-select-my-sub-cate', 'HomeController@ajaxMySubCate')->name('ajax_select_my_sub_cate.vocabulary');
 
 Route::get('lien-he', 'ContactController@getContact')->name('get.contact');
 Route::post('lien-he', 'ContactController@saveContact');

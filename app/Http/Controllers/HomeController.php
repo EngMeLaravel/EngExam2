@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\mySubCategories;
 use App\Vocabularies;
 use Illuminate\Http\Request;
 use Session;
@@ -66,6 +67,21 @@ class HomeController extends Controller
                 }
             }
             echo $output;
+        }
+    }
+
+    public function ajaxMySubCate(Request $request){
+        if($request->ajax()){
+            $data = '';
+            $datas = '';
+            $mycate_id = $request->mycate_id;
+            $mysubcategory = mySubCategories::all()->where('my_category_id',$mycate_id);
+
+            foreach ($mysubcategory as $value){
+                $data .= "<option value=$value->id>$value->my_subcate_name</option>";
+            }
+            $datas = "<option value=\"\">--Ngành con cá nhân--</option>".$data;
+            echo $datas;
         }
     }
 }

@@ -3,14 +3,23 @@
 @section('content')
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
+        var msg = '{{Session::get('success_flash')}}';
+        var exist = '{{Session::has('success_flash')}}';
+        if (exist) {
+            alert(msg);
+        }
+    </script>
     <style>
-        #content{
+        #content {
             margin-top: 20px;
         }
-        #content .row .col-md-7{
-            padding:0 40px;
+
+        #content .row .col-md-7 {
+            padding: 0 40px;
         }
-        .nganh-cha{
+
+        .nganh-cha {
             position: relative;
             border-radius: 4px;
             margin-bottom: 15px;
@@ -20,7 +29,8 @@
             background-size: cover;
 
         }
-        .nganh-cha a{
+
+        .nganh-cha a {
             position: absolute;
             top: 0;
             left: 0;
@@ -28,7 +38,8 @@
             font-weight: bolder;
             z-index: 2;
         }
-        .nganh-cha .bg-blur{
+
+        .nganh-cha .bg-blur {
             position: absolute;
             top: 0;
             left: 0;
@@ -37,12 +48,14 @@
             transition: 0.2s;
             background-color: black;
             opacity: 0.5;
-            border-radius:  4px;
+            border-radius: 4px;
             z-index: 1;
         }
-        .nganh-cha:hover .bg-blur{
+
+        .nganh-cha:hover .bg-blur {
             opacity: 0.1;
         }
+
         #content a.name_cate {
             margin: 0;
             text-align: center;
@@ -64,13 +77,15 @@
         div#context-menu a:hover {
             background: white;
         }
-        .nganh-con{
+
+        .nganh-con {
             position: relative;
             width: 100%;
             height: 120px;
             cursor: pointer;
         }
-        .nganh-con a{
+
+        .nganh-con a {
             position: absolute;
             top: 0;
             left: 0;
@@ -79,7 +94,8 @@
             z-index: 2;
 
         }
-        .nganh-con a img{
+
+        .nganh-con a img {
             position: absolute;
             top: 0%;
             left: 0%;
@@ -87,11 +103,12 @@
             width: 100%;
             border-radius: 4px;
         }
-        .nganh-con span{
+
+        .nganh-con span {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
             width: 100%;
             color: white;
             opacity: 1;
@@ -99,7 +116,8 @@
             font-size: 1.2rem;
             z-index: 2;
         }
-        .nganh-con .bg-blur{
+
+        .nganh-con .bg-blur {
             position: absolute;
             top: 0;
             left: 0;
@@ -108,17 +126,19 @@
             transition: 0.2s;
             background-color: black;
             opacity: 0.5;
-            border-radius:  4px;
+            border-radius: 4px;
             z-index: 1;
         }
-        .nganh-con:hover .bg-blur{
+
+        .nganh-con:hover .bg-blur {
             opacity: 0.1;
         }
 
-        #mot-khoi{
+        #mot-khoi {
             margin: 15px 0;
         }
-        h4#no_word_found{
+
+        h4#no_word_found {
             margin-top: 20px;
             padding: 0 20px;
         }
@@ -126,30 +146,32 @@
     </style>
     <div class="container" id="content">
         <h3 class="text-center" style="color: black;margin-bottom: 20px;">Thư viện chung</h3>
-{{--        <div class="breadcrumbs">--}}
-{{--            <div class="container">--}}
-{{--                <div class="row">--}}
-{{--                    <div class="col-md-12">--}}
-{{--                        <div class="container-inner">--}}
-{{--                            <ul>--}}
-{{--                                <li class="home">--}}
-{{--                                    <a href="/">Trang chủ</a>--}}
-{{--                                    <span><i class="fa fa-angle-right"></i></span>--}}
-{{--                                </li>--}}
-{{--                                <li class="category3"><span>Thư viện chung</span></li>--}}
-{{--                            </ul>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+        {{--        <div class="breadcrumbs">--}}
+        {{--            <div class="container">--}}
+        {{--                <div class="row">--}}
+        {{--                    <div class="col-md-12">--}}
+        {{--                        <div class="container-inner">--}}
+        {{--                            <ul>--}}
+        {{--                                <li class="home">--}}
+        {{--                                    <a href="/">Trang chủ</a>--}}
+        {{--                                    <span><i class="fa fa-angle-right"></i></span>--}}
+        {{--                                </li>--}}
+        {{--                                <li class="category3"><span>Thư viện chung</span></li>--}}
+        {{--                            </ul>--}}
+        {{--                        </div>--}}
+        {{--                    </div>--}}
+        {{--                </div>--}}
+        {{--            </div>--}}
+        {{--        </div>--}}
         <div class="row">
             <div class="col-md-2" style="position: unset;margin-top: 15px;">
                 @if(isset($category))
                     @foreach($category as $category_item)
-                        <div class="nganh-cha" style="background-image: url({{ pare_url_file($category_item->cate_avatar) }});">
+                        <div class="nganh-cha"
+                             style="background-image: url({{ pare_url_file($category_item->cate_avatar) }});">
                             <div class="bg-blur"></div>
-                            <a class="name_cate" href="{{ route("show_subcategory.public_lib.index",$category_item->id) }}">{{ $category_item->cate_name }}</a>
+                            <a class="name_cate"
+                               href="{{ route("show_subcategory.public_lib.index",$category_item->id) }}">{{ $category_item->cate_name }}</a>
                         </div>
                     @endforeach
                 @else
@@ -158,14 +180,17 @@
             </div>
             <div class="col-md-7">
                 <div class="row">
-                    <?php $vocaDoesExist = Illuminate\Support\Facades\Session::get('vocaDoesExist'); $voca_name=Illuminate\Support\Facades\Session::get('voca_name');?>
+                    <?php $vocaDoesExist = Illuminate\Support\Facades\Session::get('vocaDoesExist'); $voca_name = Illuminate\Support\Facades\Session::get('voca_name');?>
                     @if(!empty($vocaDoesExist))
                         @if($vocaDoesExist == 'false')
                             <div class="col-md-12">
-                                <h4 class="text-center" style="margin-top: 15px;"><span style="color: red;">"<?php echo $voca_name ?>"</span> hiện chưa có trong cơ sở dữ liệu!</h4>
+                                <h4 class="text-center" style="margin-top: 15px;"><span
+                                        style="color: red;">"<?php echo $voca_name ?>"</span> hiện chưa có trong cơ sở
+                                    dữ liệu!</h4>
                             </div>
                         @endif
                     @endif
+
                     @if(isset($subcategory) && count($subcategory) > 0)
                         @foreach($subcategory as $sub_category_item)
                             <div class="col-md-4" id="mot-khoi">
@@ -180,10 +205,10 @@
                         @endforeach
                     @else
                         @if(isset($vocabularies_detail))
-                                <div class="col-md-12">
-                                    @include('vocabulary.detail_voca')
-                                </div>
-                            @else
+                            <div class="col-md-12">
+                                @include('vocabulary.detail_voca')
+                            </div>
+                        @else
                             @if(isset($subcategory) && count($subcategory) <= 0)
                                 <div class="col-md-12">
                                     <hr>

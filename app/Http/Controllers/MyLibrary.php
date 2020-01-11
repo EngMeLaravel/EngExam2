@@ -6,6 +6,7 @@ use App\myCategories;
 use App\mySubCategories;
 use App\MyVocabularies;
 use App\Vocabularies;
+use App\VocaType;
 use Illuminate\Http\Request;
 
 class MyLibrary extends Controller
@@ -123,31 +124,124 @@ class MyLibrary extends Controller
         return redirect()->back();
     }
 
-    public function addBookmark($id)
+    public function addBookmark(Request $request)
     {
-        $vocabulary = Vocabularies::find($id);
+        $voca_id       = $request->id;
+        $vocabulary    = Vocabularies::where('id',$voca_id)->first();
+        $voca_name     = $vocabulary->voca_name;
+        $mycategory    = myCategories::all();
+        $mysubcategory = mySubCategories::all();
 
-        $my_vocabulary = new MyVocabularies();
+        return view('my_library.addBookmark',compact('voca_id','voca_name' ,'mysubcategory','mycategory'));
+    }
 
-        $my_vocabulary->my_voca_name         = $vocabulary->voca_name;
-        $my_vocabulary->my_voca_slug         = str_slug($vocabulary->voca_name);
-        $my_vocabulary->my_voca_mean         = $vocabulary->voca_mean;
-        $my_vocabulary->my_voca_spell        = $vocabulary->voca_spell;
-        $my_vocabulary->my_voca_type         = $vocabulary->voca_type;
-        $my_vocabulary->my_voca_example_en   = $vocabulary->voca_example_en;
-        $my_vocabulary->my_voca_example_vi   = $vocabulary->voca_example_vi;
-        $my_vocabulary->my_voca_image        = $vocabulary->voca_image;
-        $my_vocabulary->voca_id              = $vocabulary->id;
+    public function saveBookmark(Request $request){
+        $this->validate($request,
+            [
+                'voca_id' => 'unique:my_vocabularies,voca_id'
+            ],
+            [
+                'voca_id.unique' => 'Bạn đã thêm từ này vào thư viện cá nhân!'
+            ]
+        );
+        $myvocabulary                = new MyVocabularies();
 
-//        $my_vocabulary->my_subcate_id        = ;
+        $myvocabulary->voca_id       = $request->voca_id;
 
-//        $my_vocabulary->save();
+        if ($request->mycate_id){
+            $myvocabulary->my_cate_id    = $request->mycate_id;
+        }
+        if ($request->mysubcate_id){
+            $myvocabulary->my_subcate_id = $request->mysubcate_id;
+        }
 
-//        $my_vocabulary->my_cate_id           = ;
-//        $my_vocabulary->my_subcate_id        = ;
+        $myvocabulary->save();
 
-//        $my_vocabulary->save();
+        return redirect()->back()->with('success_flash','Thêm từ vựng thành công!');
+    }
 
-        return view('my_library.index');
+    public function getVocabularies($mycate_id, $mysubcate_id)
+    {
+        $myvocabularies_details = array();
+        $my_category                  = myCategories::where('user_id',get_data_user('web'))->get();
+        $myvocabularies               = MyVocabularies::where([['my_cate_id', $mycate_id], ['my_subcate_id', $mysubcate_id]])->get();
+        foreach ($myvocabularies as $item){
+            $myvocabularies_detail    = Vocabularies::where('id',$item->voca_id)->first();
+            $myvocabularies_details[]   = $myvocabularies_detail;
+        }
+
+        $viewData = [
+            'my_category'            => $my_category,
+            'myvocabularies'         => $myvocabularies,
+            'myvocabularies_details' => $myvocabularies_details
+        ];
+        //dd($myvocabularies_details);
+        return view('my_library.index', $viewData);
+    }
+
+    public function getVocaDetail($mycate_id, $mysubcate_id, $id)
+    {
+        $myvocabularies_detailss = array();
+        $my_category = myCategories::where('user_id',get_data_user('web'))->get();
+        $myvocabularies_details      = MyVocabularies::where([['my_cate_id', $mycate_id], ['my_subcate_id', $mysubcate_id],['voca_id',$id]])->first();
+
+        $myvocabularies_detailss     = Vocabularies::where('id',$myvocabularies_details->voca_id)->first();
+
+        $myvocabularies_details_edit = MyVocabularies::where('voca_id',$id)->first();
+
+        $viewData = [
+            'my_category'                 => $my_category,
+            'myvocabularies_detailss'     => $myvocabularies_detailss,
+            'myvocabularies_details_edit' => $myvocabularies_details_edit
+        ];
+        //dd($myvocabularies_detailss);
+        return view('my_library.index',$viewData);
+    }
+
+    public function deleteVoca(Request $request){
+        $delete_voca = MyVocabularies::where('voca_id',$request->voca_id);
+        $delete_voca->delete();
+        return redirect()->back();
+    }
+
+    public function editVoca($id)
+    {
+        $my_voca_type = VocaType::all();
+        $mycate = MyVocabularies::where('voca_id',$id)->first();
+        $mycategories    = myCategories::all();
+        $mysubcategories = mySubCategories::all();
+        return view('my_library.editmyvoca',compact('mycate','my_voca_type','mycategories','mysubcategories'));
+    }
+
+    public function updateVoca(Request $request, $id)
+    {
+        if ($id) {
+            $my_vocabulary = MyVocabularies::where('voca_id',$id)->first();
+        }
+
+        $my_vocabulary->my_voca_name         = $request->my_voca_name;
+        $my_vocabulary->my_voca_slug         = str_slug($request->my_voca_name);
+        $my_vocabulary->my_voca_mean         = $request->my_voca_mean;
+        $my_vocabulary->my_voca_spell        = $request->my_voca_spell;
+        $my_vocabulary->my_voca_type         = $request->my_voca_type;
+        $my_vocabulary->my_voca_example_en   = $request->my_voca_example_en;
+        $my_vocabulary->my_voca_example_vi   = $request->my_voca_example_vi;
+        $my_vocabulary->my_cate_id           = $request->my_cate_id;
+        if($request->my_subcate_id){
+            $my_vocabulary->my_subcate_id    = $request->my_subcate_id;
+        }
+
+        if ($request->hasFile('my_voca_image')) {
+
+            $file = upload_image('my_voca_image');
+
+            if (isset($file['name'])) {
+                $my_vocabulary->my_voca_image = $file['name'];
+            }
+
+        }
+
+        $my_vocabulary->save();
+        return redirect()->back();
     }
 }
